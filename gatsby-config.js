@@ -2,16 +2,26 @@
 
 module.exports = {
   siteMetadata: {
-    title: 'gatsby-starter-typescript-plus',
-    description: 'A starter kit for TypeScript-based Gatsby projects with sensible defaults.',
-    siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com',
+    title: 'Deep Learning with Javascript',
+    description: 'DLJS',
+    siteUrl: 'https://dljsbook.com',
     author: {
-      name: 'Resi Respati',
-      url: 'https://twitter.com/resir014',
-      email: 'resir014@gmail.com'
+      name: 'Kevin Scott',
     }
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-favicon`,
+      options: {
+        logo: './src/favicon.png',
+      },
+    },
+    {
+      resolve: `gatsby-mdx`,
+      options: {
+        extensions: ['.mdx', '.md'],
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -23,13 +33,14 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
+          // 'gatsby-remark-autolink-headers',
+          'gatsby-remark-prismjs',
           {
             resolve: 'gatsby-remark-responsive-iframe',
             options: {
               wrapperStyle: 'margin-bottom: 1rem'
             }
           },
-          'gatsby-remark-prismjs',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-smartypants',
           {
@@ -48,6 +59,18 @@ module.exports = {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
         siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com'
+      }
+    },
+    {
+      resolve: 'gatsby-remark-toc',
+      options: {
+        header: 'Table of Contents', // the custom header text
+        include: [
+          'content/**/*.(md|mdx)' // an include glob to match against
+        ],
+        // mdastUtilTocOptions: {
+        //   maxDepth: 2
+        // }
       }
     },
     'gatsby-plugin-emotion',

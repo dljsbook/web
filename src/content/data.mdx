@@ -1,0 +1,52 @@
+---
+layout: page
+title: "Data"
+date: "2018"
+description: "Oh, the data you'll meet"
+
+---
+
+All Deep Learning starts with data.
+
+In fact, it doesn't really make sense to talk about a neural net in the absence of data. A neural net at its core is a set of mathematical functions - a bunch of abstract theory represented in code. They only come "alive" in the presence of data.
+
+Data comes in many forms. It can be images, audio, text, numbers, or almost any other kind of data that can be stored on a computer.
+
+The particular nature of your data will dictate everything about the Neural Network that you build.
+
+Malformed data can be the source of many bugs. Often, data is incorrectly labeled, or incorrectly formatted.
+
+The types of bugs you will encounter
+
+The importance of non linearity
+
+Concatenating data together. memory management. Typed Arrays.
+
+Tensors.
+
+## Code
+
+
+We've been talking about our **training data** as a monolithic collection. In fact, we will consistently separate our data into "features" and "labels". Our features are the images themselves, and the labels describe which category they should be. You need these to be in the same order - matched up - but you also need them to be discrete tensors.
+
+Let's talk tensors.
+
+All neural nets deal in numbers. Whether your training data consists of images, audio, text or some other exotic data format, you will need to convert it into numbers for consumption by the machine. The particular method to do this will depend on your data and may often be bespoke to your particular use case. Labels are the same - you will need to take your string labels - "category one " and "category two" - and turn these into numbers.
+
+Your numbers, for images, might be the pixel data. For audio, the samples, or maybe a Fourier transform. For text, it might be numeric encodings for each word.
+
+For labels, we often do something called "one hot encoding". What that means is this:
+
+[Diagram of one hot]
+
+The reason we do this is blah blah.
+
+So what is a tensor? Let's talk tensors.
+
+Let's look at them in code.
+
+```
+tf.tensor1d();
+```
+
+You can't console.log a tensor effectively. You can print it, or you can dataSync it.

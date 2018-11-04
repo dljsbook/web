@@ -5,19 +5,25 @@ import { widths } from '../styles/variables'
 import { getEmSize } from '../styles/mixins'
 
 const StyledContainer = styled.div`
+  flex: 1;
   position: relative;
   margin-left: auto;
   margin-right: auto;
   width: auto;
-  max-width: ${getEmSize(widths.lg)}em;
-`
+  max-width: ${getEmSize(widths.xl)}em;
+  display: flex;
+  align-items: flex-start;
+`;
 
 interface ContainerProps {
-  className?: string
+  className?: string;
+  vertical?: boolean;
 }
 
-const Container: React.SFC<ContainerProps> = ({ children, className }) => (
-  <StyledContainer className={className}>{children}</StyledContainer>
-)
+const Container: React.SFC<ContainerProps> = ({ children, className, vertical }) => (
+  <StyledContainer
+    style={{ flexDirection: vertical ? 'column' : 'row'}}
+    className={className}>{children}</StyledContainer>
+);
 
-export default Container
+export default Container;

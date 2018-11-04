@@ -1,9 +1,9 @@
-import * as React from 'react'
-import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
+import * as React from 'react';
+import Helmet from 'react-helmet';
+import { StaticQuery, graphql } from 'gatsby';
 
-import 'modern-normalize'
-import '../styles/normalize'
+import 'modern-normalize';
+import '../styles/normalize';
 
 import Header from '../components/Header'
 import LayoutRoot from '../components/LayoutRoot'
@@ -12,11 +12,11 @@ import LayoutMain from '../components/LayoutMain'
 type StaticQueryProps = {
   site: {
     siteMetadata: {
-      title: string
-      description: string
-    }
-  }
-}
+      title: string;
+      description: string;
+    };
+  };
+};
 
 const IndexLayout: React.SFC = ({ children }) => (
   <StaticQuery
@@ -26,6 +26,18 @@ const IndexLayout: React.SFC = ({ children }) => (
           siteMetadata {
             title
             description
+          }
+        }
+        allMdx(sort: { fields: [fields___date], order: DESC }) {
+          edges {
+            node {
+              excerpt
+              fields {
+                slug
+                date(formatString: "DD MMMM, YYYY")
+                title
+              }
+            }
           }
         }
       }
@@ -44,6 +56,6 @@ const IndexLayout: React.SFC = ({ children }) => (
       </LayoutRoot>
     )}
   />
-)
+);
 
 export default IndexLayout

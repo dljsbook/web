@@ -1,7 +1,8 @@
 /* tslint:disable:max-line-length */
 
 export const colors = {
-  brand: '#663399',
+  brand: 'hsl(210, 10%, 23%)',
+  strongBrand: 'hsl(210, 100%, 68%)',
   lilac: '#9d7cbf',
   accent: '#ffb238',
   success: '#37b635',
@@ -18,8 +19,8 @@ export const colors = {
     calm: 'rgba(0, 0, 0, 0.54)'
   },
   white: '#fff',
-  black: '#000'
-}
+  black: '#212529'
+};
 
 export const fonts = {
   sansSerif:
