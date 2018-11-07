@@ -24,6 +24,8 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.5.0",
+    "@grove/react-font-awesome": "^1.1.5",
     "@mdx-js/mdx": "^0.15.7",
     "@mdx-js/tag": "^0.15.6",
     "babel-plugin-styled-components": "^1.7.1",

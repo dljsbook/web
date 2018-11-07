@@ -776,6 +776,16 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
+"@fortawesome/fontawesome-free@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.5.0.tgz#0c6c53823d04457ae669cd19567b8a21dbb4fcfd"
+  integrity sha512-p4lu0jfj5QN013ddArh99r3OXZ/fp9rbovs62LfaO70OMBsAXxtNd0lAq/97fitrscR0fqfd+/a5KNcp6Sh/0A==
+
+"@grove/react-font-awesome@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@grove/react-font-awesome/-/react-font-awesome-1.1.5.tgz#0fafe82e18dc1a42d27dae80efe2b7205c1a81ff"
+  integrity sha1-D6/oLhjcGkLSfa6A7+K3IFwagf8=
+
 "@jimp/bmp@^0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@jimp/bmp/-/bmp-0.4.0.tgz#9eae4b61fb82a34a529cd1f02423f5efe93a8951"

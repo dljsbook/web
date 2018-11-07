@@ -8,20 +8,19 @@ interface IProps {
 }
 
 interface IState {
+  rotate: number;
   input: string | null;
 }
 
 const Container = styled.div`
-min-height: 340px;
+overflow: hidden;
+min-height: 440px;
 background: #f9f9f9;
 box-shadow: 0 3px 2px rgba(0,0,0,0.15);
 border-radius: 5px;
-padding: 20px;
 margin: 20px 0;
 display: flex;
-justify-content: center;
-align-items: center;
-overflow: hidden;
+flex-direction: column;
 
 video {
   width: 300px;
@@ -31,11 +30,33 @@ video {
 }
 `;
 
+const Header = styled.div`
+  height: 25px;
+  background: rgba(0,0,0,0.05);
+  margin-bottom: 15px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+
+  span {
+    margin: 0 5px 0 0;
+    color: rgba(0,0,0,0.5);
+  }
+
+  a {
+    color: rgba(0,0,0,0.5);
+    cursor: pointer;
+  }
+`;
+
 const Chooser = styled.div`
+flex: 1;
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
+padding: 20px;
 `;
 
 const Or = styled.div`
@@ -46,10 +67,37 @@ const Or = styled.div`
   }
 `;
 
+const Left = styled.div`
+  text-align: left;
+  flex: 1;
+`;
+
+const Right = styled.div`
+  text-align: right;
+  flex: 1;
+`;
+
 class ImageClassifier extends React.Component<IProps, IState> {
   state: IState = {
-    input: 'images',
+    input: null,
+    rotate: 0,
   };
+
+  componentDidMount() {
+    setInterval(() => {
+      this.setState({
+        rotate: parseInt(Math.random() * 180 - 90, 10),
+      });
+    }, 200);
+  }
+
+  back = () => this.setState({
+    input: null,
+  });
+
+  reset = () => this.setState({
+    // input: null,
+  });
 
   setInput = (input: string) => this.setState({
     input,
@@ -59,11 +107,22 @@ class ImageClassifier extends React.Component<IProps, IState> {
     if (this.state.input === null) {
       return (
         <Container>
+          <Header />
           <Chooser>
             <p>Choose your input source</p>
-            <Button handleClick={() => this.setInput('webcam')}>📷 Webcam</Button>
+            <Button
+              handleClick={() => this.setInput('webcam')}
+            >
+              <span className='fa fa-camera-retro' />
+              Webcam
+            </Button>
             <Or />
-            <Button handleClick={() => this.setInput('images')}>🖼 Google Images</Button>
+            <Button
+              handleClick={() => this.setInput('images')}
+            >
+              <span className='fa fa-images' />
+              Images
+            </Button>
           </Chooser>
         </Container>
       );
@@ -71,7 +130,21 @@ class ImageClassifier extends React.Component<IProps, IState> {
 
     return (
       <Container>
-        <UI>
+        <Header>
+          <Left>
+            <a onClick={this.back}>
+              <span className='fa fa-chevron-left' />
+              Back
+            </a>
+          </Left>
+          <Right>
+            <a onClick={this.reset}>
+              <span className='fa fa-undo' />
+              Reset
+            </a>
+          </Right>
+        </Header>
+        <UI rotate={this.state.rotate}>
           {this.state.input === 'webcam' ? (
             <video />
           ) : (

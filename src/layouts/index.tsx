@@ -4,10 +4,10 @@ import { StaticQuery, graphql } from 'gatsby';
 
 import 'modern-normalize';
 import '../styles/normalize';
-
-import Header from '../components/Header'
-import LayoutRoot from '../components/LayoutRoot'
-import LayoutMain from '../components/LayoutMain'
+import '@fortawesome/fontawesome-free/css/all.css';
+import Header from '../components/Header';
+import LayoutRoot from '../components/LayoutRoot';
+import LayoutMain from '../components/LayoutMain';
 
 type StaticQueryProps = {
   site: {

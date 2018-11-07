@@ -41,7 +41,6 @@ const Body = styled.div`
 /* eslint-disable */
 const PageTemplate = ({ data, __mdxScope }) => {
   const post = data.mdx;
-  console.log(data);
   return (
     <IndexLayout>
       <Jumbotron
@@ -88,45 +87,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-// export const query = graphql`
-//   query PageTemplateQuery($slug: String!) {
-//     site {
-//       siteMetadata {
-//         title
-//         description
-//         author {
-//           name
-//         }
-//       }
-//     }
-//     allSitePage {
-//       edges {
-//         node {
-//           path
-//         }
-//       }
-//     }
-//     markdownRemark(fields: {slug: {eq: $slug}}) {
-//       html
-//       excerpt
-//       tableOfContents
-//       frontmatter {
-//         title
-//         description
-//       }
-//     }
-//     mdx(id: {eq: "6ee945eb-e5e5-5f02-aba6-b9bd0547da3b"}) {
-//       id
-//       parent {
-//         ... on File {
-//           name
-//           sourceInstanceName
-//         }
-//       }
-//       code {
-//         scope
-//       }
-//     }
-//   }
-// `;

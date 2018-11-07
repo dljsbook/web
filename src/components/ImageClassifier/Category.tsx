@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import Button from './Button';
 import Gallery from './Gallery';
+import { colors, lighten } from '../../styles/variables';
 
 const Container = styled.div`
 display: flex;
@@ -32,12 +33,19 @@ interface IProps {
 
 const Category:React.SFC<IProps> = ({
   title,
-}) => (
-  <Container>
-    <h2>Category {title}</h2>
-    <Gallery images={[]} />
-    <Button handleClick={() => 'foo'}>Capture</Button>
-  </Container>
-);
+}) => {
+  const index = title === 'One' ? 0 : 1;
+  return (
+    <Container>
+      <h2
+        style={{
+          color: `${lighten(colors.categories[index].join(','), 0)}`,
+        }}
+      >Category {title}</h2>
+      <Gallery images={[]} />
+      <Button index={index} handleClick={() => 'foo'}>Capture</Button>
+    </Container>
+  );
+};
 
 export default Category;
