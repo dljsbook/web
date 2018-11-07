@@ -81,4 +81,18 @@ We'll be using Tensorflow.js throughout this book.
 
 # Talk stuff
 
-What is machine learning
+the cycle is often data // vuild model // train.
+
+actually its more of a loop.build and train influence each other.also your data can change too.
+
+so its a big cycle.
+
+were going to tackle these topics in the following order:
+
+train
+data
+build
+
+
+
+
