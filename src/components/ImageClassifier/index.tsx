@@ -1,3 +1,5 @@
+import Fuck from 'fuck';
+
 import * as React from 'react';
 import styled from 'react-emotion';
 import Button from './Button';
@@ -34,7 +36,7 @@ const Header = styled.div`
   height: 25px;
   background: rgba(0,0,0,0.05);
   margin-bottom: 15px;
-  padding: 0 20px;
+  padding: 0 10px;
   display: flex;
   align-items: center;
   font-size: 13px;
