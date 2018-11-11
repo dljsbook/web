@@ -7,7 +7,7 @@ import Page from '../components/Page';
 import Container from '../components/Container';
 import IndexLayout from '../layouts';
 import Jumbotron from '../components/Jumbotron';
-import ToC from '../components/ToC';
+// import ToC from '../components/ToC';
 
 // interface PageTemplateProps {
 //   data: {

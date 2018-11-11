@@ -70,8 +70,8 @@ const Header: React.SFC<HeaderProps> = ({ title }) => (
         {title}
       </HomepageLink>
       <NavLink to="/introduction">Introduction</NavLink>
-      <NavLink to="/training">Training</NavLink>
       <NavLink to="/data">Data</NavLink>
+      <NavLink to="/training">Training</NavLink>
       <NavLink to="/models">Models</NavLink>
       <NavLink to="/resources">Resources</NavLink>
     </HeaderInner>

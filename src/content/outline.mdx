@@ -1,0 +1,150 @@
+---
+layout: page
+title: "Outline"
+date: "2018"
+description: "an outline"
+
+---
+
+
+
+# Getting Started
+
+## What's Deep Learning
+
+Talk talk
+
+## What's it good for
+
+Lots of examples. Weave some history in here.
+
+## Kicking the tires
+
+Example
+
+## How does it work
+
+High level overview
+
+
+# Data
+
+## What defines a good dataset
+
+Your dataset should be as close as possible to your expected data.
+
+Representative
+
+Well-balanced
+
+SHuffled
+
+## How is data stored and processed
+
+To feed data to a neural net, it first needs to be transformed into a numeric form.
+
+This will depend on your datatype. For images, you generally take pixel data and crush it. If its audio, you might take the samples, or maybe take some higher level representation, like a mel spectogram. If its text, you might assign each word a number, or you might use a pretrained set of word embeddings.
+
+Whatever the type of data, the end product is the same: a tensor. What is a tensor?
+
+Tensors are backed up, in Javascript, by Typed Arrays. Typed arrays blah blah.
+
+Memory management, these are hefty buggers. You gotta clear them.
+
+## Manipulating data
+
+We've mostly been discussing data as "things" and their "labels". For instance, an image and its label of dog.
+
+Prior to feeding data, we need to separate our "things" from their "labels", and package up "things" and "labels" into 2 tensors.
+
+Here's how that would look:
+
+---
+
+Tensorflow and other libraries give you convenience methods for shuffling data and slicing into batches automatically. You should take advantage of these. Occasionally you'll run into situations where you need to handle these yourself - for instance, if you have some particularly exotic form of data augmentation (we'll discuss what that is later).
+
+In that case, here's an example function:
+
+Also with labels, you want something called one hots.
+
+## Data Augmentation
+
+This stuff is cool. You supplement your dataset.
+
+# Training
+
+## Examples
+
+Splitting data into buckets
+
+Train, test, validation.
+
+https://towardsdatascience.com/train-validation-and-test-sets-72cb40cba9e7
+
+## Practice
+
+Iteration, hyperparameters (learning rate)
+
+## Rewards
+
+*Dunno what to do about this section.*
+
+Loss
+
+Forward and backward propagation
+
+Weights -> next section
+
+# Models
+
+## The component parts
+
+Neurons
+
+Weights
+
+Layers
+
+Optimizer
+
+## Non Linearity
+
+An oft-repeated claim from traditional machine learning folks is that traditional statistical methods outperform in many cases deep learning. They're also faster and more interpretable.
+
+This is all true. Take this linear shit:
+
+linear
+
+You do linear regression on it and you're done.
+
+Where deep learning shines is with non linear data and where you don't want to do feature engineering.
+
+The reason deep learning is capable of learning non linear data is because of activation functions. Let's look at a few:
+
+Activation Functions
+
+So let's take some sample moons data and see how it does.
+
+## Transfer Learning
+
+What they are
+
+How to find them and understand them
+
+How to build a new model on top of them.
+
+
+
+
+
+# Not included
+
+gradient descent
+
+Bugs
+
+await next frame
+
+CNNs
+
+Building image classification from scratch

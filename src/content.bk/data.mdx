@@ -10,99 +10,13 @@ All neural nets begin with data, on both a conceptual level and a physical level
 
 A neural net, at its core, is just a set of mathematical functions - theory represented in code. Neural nets only come "alive" in the presence of data.
 
+## Types of Data
+
 What is data? Data are the things you measure, the things you make predictions on.
 
 Data can be anything representable in numeric form in a computer. It can be numbers, or tabular data. It can be images, audio, or video. It can be text, PDFs, documents, webpages. It can be laser recordings from the top of autonomous cars, EMRs from medical devices, even EKGs from brain waves. If it can be represented in numerical form - and really, anything we can measure is capable of becoming numeric - then it can be data.
 
 The particular nature of your data will dictate everything about the Neural Network that you build.
-
-## The Platonic Dataset
-
-What defines a good dataset? Your dataset should be as close as possible to your expected data. In particular, you should keep in mind three things. A dataset should be:
-
-* Representative
-* Well-balanced
-* Shuffled
-
-Let's examine each of these.
-
-### Representative
-One thing that's important is to provide data that is representative of the data you wish to see. For instance, if your training data consists of well-lit data like:
-
-![Categories of data](categories.svg)
-
-yet the data you predict on looks like:
-
-![Prediction](pred.svg)
-
-the machine will struggle to predict successfully.
-
-Commonly with image data, a non-representative dataset will appear when a model is trained only with well-lit, high quality photography, only to receive grainy, low resolution uploaded photos from users. In this case, the model often fails to correctly identify and classify photos. 
-
-Remember, a neural net brings no common sense to the table. It only knows what it sees during training. It'd be like training your dog to "Sit!" on command, then switch from English to Spanish and expect her to understand.
-
-### Well-Balanced
-You also want your dataset to be well balanced. You want as close to the same number of data points per category. If one category is overrepresented, you have an **unbalanced dataset**. An unbalanced dataset can lead to problems with prediction. For instance, if 90% of your data belongs to category one, your model might very well learn to assume that everything belongs to category one. After all, 90% of the time, it'll be right 100% of the time!
-
-![Balanced vs. unbalanced dataset](balanced-datasets.svg)
-
-### Shuffled
-Finally, every time you train, your data should be shuffled anew.
-
-You want to prevent the network from learning any specific patterns that might be inherent in your training data. These patterns will almost certainly not be present when you go to predict. A common way this can happen is when categories are concatenated one after the other, and the model learns to predict based on where it is in the dataset.
-
-If you always train your dog to sit, lie down, and play dead in the same order, after a while, the dog will begin to anticipate the moves, instead of learning to associate the commands with the actions. She will expect a treat and you will have no one but yourself to blame.
-
-Shuffling your data breaks the ability to learn those associations, and will strengthen the connections that we actually want it to learn.
-
-![Shuffled](shuffled.svg)
-
-
-## How is data stored and processed
-
-To feed data to a neural net, it first needs to be transformed into a numeric form.
-
-This will depend on your datatype. For images, you generally take pixel data and crush it. If its audio, you might take the samples, or maybe take some higher level representation, like a mel spectogram. If its text, you might assign each word a number, or you might use a pretrained set of word embeddings.
-
-Whatever the type of data, the end product is the same: a tensor. What is a tensor?
-
-Tensors are backed up, in Javascript, by Typed Arrays. Typed arrays blah blah.
-
-Memory management, these are hefty buggers. You gotta clear them.
-
-## Manipulating data
-
-We've mostly been discussing data as "things" and their "labels". For instance, an image and its label of dog.
-
-Prior to feeding data, we need to separate our "things" from their "labels", and package up "things" and "labels" into 2 tensors.
-
-Here's how that would look:
-
----
-
-Tensorflow and other libraries give you convenience methods for shuffling data and slicing into batches automatically. You should take advantage of these. Occasionally you'll run into situations where you need to handle these yourself - for instance, if you have some particularly exotic form of data augmentation (we'll discuss what that is later).
-
-In that case, here's an example function:
-
-Also with labels, you want something called one hots.
-
-## Data Augmentation
-
-This stuff is cool. You supplement your dataset.
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
----
-
 
 ## Bugs
 
@@ -127,6 +41,14 @@ These tend not to manifest themselves as catastrophic failures, but in an inabil
 One way to mitigate these network bugs is to start small. Take the smallest possible dataset, one you know inside and out, and start with a simple neural network that others have benchmarked. Build things iteratively, testing your accuracy and loss every step of the way, and adding complexity one step at a time.
 
 We'll take this approach in the next section, by starting with the simplest possible dataset, and making it more complex as we proceed.
+
+## Non-Linearity
+
+The importance of non linearity - activation functions.
+
+Concatenating data together. memory management. Typed Arrays.
+
+Tensors.
 
 ## Code
 

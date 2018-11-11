@@ -7,24 +7,6 @@ description: "A definition of terms, history, and use cases of Deep Learning"
 
 ---
 
-## What's Deep Learning
-
-Talk talk
-
-## What's it good for
-
-Lots of examples. Weave some history in here.
-
-## Kicking the tires
-
-Example
-
-## How does it work
-
-High level overview
-
----
-
 ## Who This Is For
 
 This is a book for Javascript Developers interested in Deep Learning.
