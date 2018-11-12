@@ -58,4 +58,4 @@ const IndexLayout: React.SFC = ({ children }) => (
   />
 );
 
-export default IndexLayout
+export default IndexLayout;

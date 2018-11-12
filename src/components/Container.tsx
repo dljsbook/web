@@ -1,8 +1,7 @@
-import * as React from 'react'
-import styled from 'react-emotion'
-
-import { widths } from '../styles/variables'
-import { getEmSize } from '../styles/mixins'
+import * as React from 'react';
+import styled from 'react-emotion';
+import { widths } from '../styles/variables';
+import { getEmSize } from '../styles/mixins';
 
 const StyledContainer = styled.div`
   flex: 1;
@@ -13,6 +12,19 @@ const StyledContainer = styled.div`
   max-width: ${getEmSize(widths.xl)}em;
   display: flex;
   align-items: flex-start;
+
+  code {
+    padding: 2px 5px;
+    font-size: 90%;
+    white-space: pre-wrap;
+    background-color: rgba(0,0,0,.04);
+  }
+
+  pre {
+  code {
+  background-color: transparent;
+  }
+  }
 `;
 
 interface ContainerProps {

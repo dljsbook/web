@@ -7,24 +7,6 @@ description: "A definition of terms, history, and use cases of Deep Learning"
 
 ---
 
-## What's Deep Learning
-
-Talk talk
-
-## What's it good for
-
-Lots of examples. Weave some history in here.
-
-## Kicking the tires
-
-Example
-
-## How does it work
-
-High level overview
-
----
-
 ## Who This Is For
 
 This is a book for Javascript Developers interested in Deep Learning.
@@ -35,13 +17,21 @@ We're going to spend a majority of the time discussing Deep Learning concepts, a
 
 We're also going to be focused solely on applications of Deep Learning in Javascript. There is a rich and deep field of study, much of which unfortunately falls outside the scope of this book. My hope is that the next few chapters can serve as your first stop on a long path of self-study and learning.
 
+We'll be using a library called `Tensorflow.js` for the duration of this book. There are a number of supporting libraries you can install, or include on your HTML page. You can install them all with:
+
+```
+npm install dljsbook
+```
+
+Alternatively, include them with:
+
+```
+<script />
+```
+
 ## What is Deep Learning
 
-Let's start with some definitions so we're on the same page.
-
-### Sub heading
-
-**Machine Learning** is the practice of teaching computers to make predictions. This can encompass a wide array of use cases, such as: what is the expected price of this house? Is this a picture of a dog or a cat? Will this stock price go up or down, and by how much?
+**Machine Learning** is the practice of teaching computers to learn things and make predictions. This can encompass a wide array of use cases, such as: what is the expected price of this house? Is this a picture of a dog or a cat? Will this stock price go up or down, and by how much?
 
 **Deep Learning** is a subset of Machine Learning. The "Deep" part refers to the architecture of the network, specifically that it has many layers (it is "deep").
 
@@ -49,11 +39,15 @@ Machine Learning, when used in contrast to Deep Learning, can also be shorthand 
 
 You'll often hear **Artificial Intelligence** bandied about as well. This is a broad term and, when used in a sentence, can refer to anything from Logistic Regression to Skynet presaging the extermination of humanity.
 
-![](https://imgs.xkcd.com/comics/skynet.png)
+For the duration of this book I’ll stick to “Deep Learning” to make clear we're focused on building neural nets with deep layers.
 
-*For the duration of this book I’ll stick to “Deep Learning” to make clear we're focused on building neural nets with deep layers*.
+https://www.explainthatstuff.com/introduction-to-neural-networks.html
 
----
+## What are Neural Networks Good For
+
+Deep Learning has a lot of applications.
+
+Lots of examples. Weave some history in here.
 
 Deep Learning has a long history. The guy who originally invented it thought that all computers would program themselves. The reality is considerably more mundane. AI Winters.
 
@@ -88,29 +82,31 @@ I would be remiss if I did not note the obvious downsides that come with Deep Le
 
 However, if there's one thing I know about Javascript, it's that change is constant, and it's hard to imagine these will be problems years from now.
 
+## Kicking the tires
 
-## Organization
+Example
 
-Each section will feature one or two datasets, generally becoming more complex.
+## Overview
 
-Ready to take the next step? [Let's start with the basics](/basics).
+Deep Learning is an absurdly deep field.
 
-We'll be using Tensorflow.js throughout this book.
+The first step in the deep learning pipeline is the **data**.
 
-# Talk stuff
+Data must be prepared for consumption by the neural network. At the very minimum, this means ensuring that the data is numeric. There are a number of other needs that we'll address in the next chapter.
 
-the cycle is often data // vuild model // train.
+From there, we design the architecture of our **model**. In this phase, we design our model, drawing on a previous set of knowledge to help inform design, based on our data and what we're trying to predict. We may also leverage pretrained models that others have trained and released into the wild.
 
-actually its more of a loop.build and train influence each other.also your data can change too.
+Finally, we **train** our model. Neural networks have two phases: training and inference.
 
-so its a big cycle.
+When running in inference mode, neural networks consume data and make predictions on that data. So you might feed the network a particular image of a beach, with the expectation that the model will predict "beach".
 
-were going to tackle these topics in the following order:
+When running in training mode, the neural network does all of the same steps - consumes data and makes predictions - but it also measures the accuracy of its predictions, and then *modifies itself* to become a little bit more accurate.
 
-train
-data
-build
+The formal names for these two processes are **forward propagation** and **back propagation**, respectively.
+
+This is not a strictly linear process. Bugs can arise in data and models. Often you'll start with a small dataset, build a simple model, train it and glean some insights. Those insights may lead you to experiment with different model architectures; they may also suggest changes to your dataset that can lead to better performance. Therefore its better to think of this process as a loop, instead of a linear process.
+
+In this book, we'll discuss these three parts independently - **data**, **training**, and **architecture** - in that order.
 
 
-
-
+> A typical neural network has anything from a few dozen to hundreds, thousands, or even millions of artificial neurons called units arranged in a series of layers, each of which connects to the layers on either side. Some of them, known as input units, are designed to receive various forms of information from the outside world that the network will attempt to learn about, recognize, or otherwise process. Other units sit on the opposite side of the network and signal how it responds to the information it's learned; those are known as output units. In between the input units and output units are one or more layers of hidden units, which, together, form the majority of the artificial brain. Most neural networks are fully connected, which means each hidden unit and each output unit is connected to every unit in the layers either side. The connections between one unit and another are represented by a number called a weight, which can be either positive (if one unit excites another) or negative (if one unit suppresses or inhibits another). The higher the weight, the more influence one unit has on another. (This corresponds to the way actual brain cells trigger one another across tiny gaps called synapses.)

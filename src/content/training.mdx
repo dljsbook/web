@@ -6,97 +6,27 @@ description: "An Overview of the Training Process of a Neural Net"
 
 ---
 
-## Examples
 
-You've got a well balanced training dataset that you're shuffling consistently, and its representative of your real life data. How do you know how well your model is performing on this data? You can measure this by setting aside chunks of your dataset as **test data** and **validation data**.
+Training a computer is sort like training a dog. We'll ride this metaphor as far as it'll take us.
 
-Splitting data into buckets
-
-Train, test, validation.
-
-https://towardsdatascience.com/train-validation-and-test-sets-72cb40cba9e7
-
-## Practice
-
-Iteration, hyperparameters (learning rate)
-
-## Rewards
-
-*Dunno what to do about this section.*
-
-Loss
-
-Forward and backward propagation
-
-Weights -> next section
-
-
----
-
-import { ImageClassifier } from '@dljsbook/ui/src/index.tsx';
-
-<ImageClassifier />
-
-I'm a dog person. I spend an inordinate amount of time on Instagram looking at hilarious dogs.
-
-Turns out, training a dog...
-
-I'm currently in the process of adopting a dog, and in preparation I've been looking into dog trainers. If you've never trained a dog before, it's a hell of a good time.
-
-First, the dog has to demonstrate the behavior you're trying to train. For instance, if you're training them to sit - let's call this an **example**. Once the dog has done the behavior, you give the dog some **reward**, like a treat. In this way, the **example** is associated with a **reward**. You then repeat this process, over and over, until the dog gets it. This **repetition** helps cement the link between the behavior and the expected reward.
+When training a dog, first, the dog has to demonstrate the behavior you're trying to train. For instance, if you're training them to sit - let's call this an **example**. Once the dog has done the behavior, you give the dog some **reward**, like a treat. In this way, the **example** is associated with a **reward**. You then repeat this process, over and over, until the dog gets it. This **repetition** helps cement the link between the behavior and the expected reward.
 
 It turns out that these three things are also used to train a machine. Let's examine each of these and see how they apply to deep learning.
 
-# Examples
+## Examples
 
-Below is an implementation of an image classifier. It receives an input source, which can be either your webcam, or some set of images, and it will predict whether the image belongs to one of two **classes**.
+When you train a dog, you need examples of the behavior you wish to reward. Similarly, with a neural network, you compile a list of examples that demonstrate what you wish the network to learn. These examples comprise your total dataset.
 
-Try capturing some data below.
+Often (though not always), you will split your data into buckets randomly. The buckets are called Train, Test, and Validation sets.
 
-Isn't that amazing? This wasn't something you could do ten years ago, even five years ago. I think this is amazing.
+https://towardsdatascience.com/train-validation-and-test-sets-72cb40cba9e7
 
-Let's talk about what's going on here. Here is the data you provided:
-
-[SHOW TABLE OF IMAGES, left and right]
-
-This is known as **training data**. The machine uses this data to train itself on being able to classify an image as category one or category two.
-
-Depending on how you trained your model, you may have gotten high accuracy, or maybe awful accuracy. There's three things to note about good **training data**.
-
-### Representative
-One thing that's important is to provide data that is representative of the data you wish to see. For instance, if your training data consists of well-lit data like:
-
-![Categories of data](categories.svg)
-
-yet the data you predict on looks like:
-
-![Prediction](pred.svg)
-
-the machine will struggle to predict successfully.
-
-Commonly with image data, a non-representative dataset will appear when a model is trained only with well-lit, high quality photography, only to receive grainy, low resolution uploaded photos from users. In this case, the model often fails to correctly identify and classify photos. 
-
-Remember, a neural net brings no common sense to the table. It only knows what it sees during training. It'd be like training your dog to "Sit!" on command, then switch from English to Spanish and expect her to understand.
-
-### Well-Balanced
-You also want your dataset to be well balanced. You want as close to the same number of data points per category. If one category is overrepresented, you have an **unbalanced dataset**. An unbalanced dataset can lead to problems with prediction. For instance, if 90% of your data belongs to category one, your model might very well learn to assume that everything belongs to category one. After all, 90% of the time, it'll be right 100% of the time!
-
-![Balanced vs. unbalanced dataset](balanced-datasets.svg)
-
-### Shuffled
-Finally, every time you train, your data should be shuffled anew.
-
-You want to prevent the network from learning any specific patterns that might be inherent in your training data. These patterns will almost certainly not be present when you go to predict. A common way this can happen is when categories are concatenated one after the other, and the model learns to predict based on where it is in the dataset.
-
-If you always train your dog to sit, lie down, and play dead in the same order, after a while, the dog will begin to anticipate the moves, instead of learning to associate the commands with the actions. She will expect a treat and you will have no one but yourself to blame.
-
-Shuffling your data breaks the ability to learn those associations, and will strengthen the connections that we actually want it to learn.
-
-![Shuffled](shuffled.svg)
-
-## Other datasets
 
 You've got a well balanced training dataset that you're shuffling consistently, and its representative of your real life data. How do you know how well your model is performing on this data? You can measure this by setting aside chunks of your dataset as **test data** and **validation data**.
+
+### Training Data
+
+This is the bulk of your dataset; this is the data your model consumes and learns from.
 
 ### Test Data
 
@@ -106,31 +36,26 @@ A **test dataset** is data the machine *has never seen before*. You hold it in r
 
 While its important to get good accuracy on your training dataset, the true test of your model is the score for your **test dataset**. If you can score well against this data, you're golden.
 
-Common practice is to set aside some percentage of your total dataset as your test dataset. A good rule of thumb is:
-
-10%
-
-Let's see how that looks with our image classifier from above.
-
-[IMAGE CLASSIFIER DIVIDED]
-
-Is your dataset balanced? I can't tell - I'm just a book - but look to see whether the test data is representative of your training data.
+*Is your dataset balanced? I can't tell - I'm just a book - but look to see whether the test data is representative of your training data.*
 
 ### Validation Data
 
-There's a third type of data you might encounter, and that's called **validation data**. This is some portion of your dataset that is held back during training, and used to measure the accuracy during training. This is not strictly mandatory (most of these are just rules of thumb, and can and do change based on your use case).
+There's a third bucket you might separate, a **validation set**. This is similar to the test set from above, in that its some portion of your dataset that is held back during training, and used to measure the accuracy *during* training.
 
-There are two techniques here, you can either, for each epoch (what is an epoch?) set aside some portion of the training data as your validation data; or you can set aside the same portion each time. Visual demonstrations of both techniques are below.
+Validation data can either be a set slab of data separated before training begins, or it can be randomly selected at the start of each epoch. The former provides a more accurate ready of the model's ongoing performance, but can rob you of precious data if you don't have much.
 
-If you have enough data - and how much is enough? - setting aside a dedicated validation portion can be a good strategy, since it gives you confidence that the accuracy is based on the model learning independently of the validation data. If you're dealing with smaller datasets, and in the browser we often are, data is your most precious resource and you want to be strategic in how you deploy it. In these cases, setting aside a small portion each cycle can make more sense. In this case, make sure
+Validation data especially helps with tuning hyperparameters.
+
+If you have enough data, setting aside a dedicated validation portion can be a good strategy, since it gives you confidence that the accuracy is based on the model learning independently of the validation data. If you're dealing with smaller datasets, and in the browser we often are, data is your most precious resource and you want to be strategic in how you deploy it. In these cases, setting aside a small portion each cycle can make more sense. In this case, make sure
 to slice this off after you shuffle, so you're always testing on a different portion.
 
+How much data should make up each dataset? It depends. For datasets upwards of 100,000 data points, 10,000 points each for test and validation sets is more than enough and you shouldn't exceed 10,000. For smaller datasets, it depends on how big your dataset is, and how complex your model is. A very rough starting point is 80% for training, and 10% each for validation and test, but you'll have to experiment with this.
 
-So you can begin to see what's going on. You give the model a tensor - an array - of input values, along with a tensor of expected labels. In a perfect world, the values the network predicts match up with the labels. The difference with this reality - how wrong the model is - is the thing we wish to work on.
+Anyways - we're now giving the model a tensor of input values, and a tensor of labels. We wish for our predicted values to match up perfectly with the provided labels. The difference with this reality - how wrong the model is - is the parameter we wish to improve.
 
-How does that process work? We'll learn more about that in the next two sections.
+## Practice
 
-# Practice
+Iteration, hyperparameters (learning rate)
 
 You wouldn't expect your dog to learn a trick on the first try; hell, sometimes not even on the hundredth try. Similarly, a neural network needs to work through many attempts before it's able to hone on correct answers.
 
@@ -176,13 +101,17 @@ tf.awaitFrame
 
 use them.
 
-# Rewards
+
+## Rewards
+
+Loss
+
+Forward and backward propagation
 
 
-* here, dig into loss, gradient descent, and other goodies
+* here, dig into loss, and other goodies
     * explain how forward propagation works. how does a network wind up with a prediction?
         * expanding tensor dimensions, and concatenating
-        * number of classes
     * talk about how loss is the sum of the differences
         * talk about how you want to minimize loss, and how you do that with gradient descent
         * talk about what kinds of losses there are
@@ -208,6 +137,8 @@ Here's some formal terms for ya: **forward propagation** is sending numbers thro
 Let's see a simple example. We start with totally randomized weights. We then send some numbers through the network. We get our loss. We then adjust the weights some large amount, TIMES what's called the learning rate. Learning rate represents a **hyperparameter** - an argument you can tune in the network to get better results. There's no right answer for what this should be, but there are guidelines.
 
 Why don't we want to just take a big leap? Iteration is the key. You could overshoot. Let's see an example - if we had a huge learning rate. In fact, you can play with the learning rate.
+
+So we're tweaking the weights. What are weights? Well, that leads us into our next section: the architecture of your model.
 
 
 ---

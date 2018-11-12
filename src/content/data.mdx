@@ -60,97 +60,110 @@ Shuffling your data breaks the ability to learn those associations, and will str
 
 ## How is data stored and processed
 
-To feed data to a neural net, it first needs to be transformed into a numeric form.
+Neural networks operate on numbers, so any data you provide must first be transformed into numeric form.
 
-This will depend on your datatype. For images, you generally take pixel data and crush it. If its audio, you might take the samples, or maybe take some higher level representation, like a mel spectogram. If its text, you might assign each word a number, or you might use a pretrained set of word embeddings.
+There are a number of common strategies depending on the type of data you're using. For images, pixel data is already in numeric form (across three RGB channels), though the pixel values are generally resampled to be between -1 and 1. Audio files might be processed into some higher level representation, like a mel spectogram. Words can each be assigned a number, or better, a set of word embeddings provided by a pretrained corpus.
 
-Whatever the type of data, the end product is the same: a tensor. What is a tensor?
+Most Deep Learning frameworks expect data in the form of tensors. Tensors are a concept imported from the world of mathematics, and provide a container for storing multidimensional arrays.
 
-Tensors are backed up, in Javascript, by Typed Arrays. Typed arrays blah blah.
+[IMAGE OF TENSOR]
 
-Memory management, these are hefty buggers. You gotta clear them.
+Tensors contain data, but they also have dimension, shape, type, and describe valid transformations. In particular, the dimension - also known as a tensor's rank - is important to understand. A tensor's shape is tied to that and is also important. Here's a [3x3x3] tensor:
+
+[IMAGE OF TENSOR]
+
+Tensors are backed up, in Javascript, by `TypedArray`s.
+
+`TypedArray`s provide an efficient mechanism for handling data. 
+
+https://thekevinscott.com/tensors-in-javascript/
+
+Tensors can do a number on your browser if you leave them sitting around, so you need to get comfortable with doing some garbage collection. `Tensorflow.js` provides two mechanisms for handling unneeded tensors.
+
+First, you can manually dispose of a tensor by calling `tensor.dispose()`.
+
+An easier option is to call the function `tf.tidy`:
+
+```
+tf.tidy(() => {
+  const x = tf.tensor1d();
+});
+
+// x will be cleared, maybe?
+```
+
+`tf.tidy` only accepts synchronous functions, so anything being returned from within a promise or async function is no good.
 
 ## Manipulating data
 
-We've mostly been discussing data as "things" and their "labels". For instance, an image and its label of dog.
+We've mostly been discussing data as "things" and their "labels". For instance, an image and its label.
+
+[Image and a label]
+
+We've been talking about our **training data** as a monolithic collection. In fact, we will consistently separate our data into "features" and "labels". Our features are the images themselves, and the labels describe which category they should be. You need these to be in the same order - matched up - but you also need them to be discrete tensors.
 
 Prior to feeding data, we need to separate our "things" from their "labels", and package up "things" and "labels" into 2 tensors.
 
 Here's how that would look:
 
----
+[IMAGE OF SEPARATED]
 
-Tensorflow and other libraries give you convenience methods for shuffling data and slicing into batches automatically. You should take advantage of these. Occasionally you'll run into situations where you need to handle these yourself - for instance, if you have some particularly exotic form of data augmentation (we'll discuss what that is later).
+We'll talk about training in the next section, but you'll often want to slice and rearrange your data. Tensorflow.js and other libraries give you convenience methods for shuffling data and slicing into batches automatically. You should take advantage of these. Occasionally you'll run into situations where you need to handle these yourself - for instance, if you have some particularly exotic form of data augmentation (we'll discuss what that is later).
 
 In that case, here's an example function:
 
-Also with labels, you want something called one hots.
-
-## Data Augmentation
-
-This stuff is cool. You supplement your dataset.
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
----
-
-
-## Bugs
-
-As programmers, we're used to syntactic errors. Things like missing definitions, variables used before they're defined, that sort of thing. We have a rich ecosystem of tools - IDEs, compilers - designed to help us mitigate these bugs and catch them before they reach an end user, and these tools are very good.
-
-With neural nets, there's two more classes of bugs you'll encounter. Data bugs and model bugs.
-
-Data bugs can manifest in a number of ways. If you're dealing with images, you might have mislabeled images, or images transformed or processed incorrectly.
-
-If you're dealing with text, maybe it's text that's cut off, garbled, or in the wrong format - ASCII when it should be in UTF-8.
-
-<img src="glitch.png" />
-
-Then there's bugs in your data - mislabeled things, images that are transformed incorrectly, processed incorrectly. Maybe if text, it's text that's cut off, or garbled, or in ASCII when it should be in UTF-8. All that stuff's important.
-
-Many of these bugs are simple to catch in isolated cases but can sneak in perniciously under the radar and cause your model to train wrong. If you're working with large datasets, cleaning your data becomes a bear.
-
-Then there's model bugs - bugs that arise from the way you've designed your neural network.
-
-These tend not to manifest themselves as catastrophic failures, but in an inability of the neural net to perform the way you hope it will. When working in a novel domain, it is often hard to know what exactly to expect from yoru model's accuracy, making these bugs even more pernicious; if you don't even know how effective your model *should* be, then what?
-
-One way to mitigate these network bugs is to start small. Take the smallest possible dataset, one you know inside and out, and start with a simple neural network that others have benchmarked. Build things iteratively, testing your accuracy and loss every step of the way, and adding complexity one step at a time.
-
-We'll take this approach in the next section, by starting with the simplest possible dataset, and making it more complex as we proceed.
-
-## Code
-
-
-We've been talking about our **training data** as a monolithic collection. In fact, we will consistently separate our data into "features" and "labels". Our features are the images themselves, and the labels describe which category they should be. You need these to be in the same order - matched up - but you also need them to be discrete tensors.
-
-Let's talk tensors.
+```
+return sliced data
+```
 
 All neural nets deal in numbers. Whether your training data consists of images, audio, text or some other exotic data format, you will need to convert it into numbers for consumption by the machine. The particular method to do this will depend on your data and may often be bespoke to your particular use case. Labels are the same - you will need to take your string labels - "category one " and "category two" - and turn these into numbers.
 
 Your numbers, for images, might be the pixel data. For audio, the samples, or maybe a Fourier transform. For text, it might be numeric encodings for each word.
 
-For labels, we often do something called "one hot encoding". What that means is this:
+Your labels also need to be numbers, and we often want to perform something called "one hot" on them. *Where does the name "one hot" come from?*
 
-[Diagram of one hot]
+Next, you'll need to convert your labels into numeric form. However, it's not as simple as assigning a number to each category. To demonstrate, let's say you're classifying three categories of fruit:
 
-The reason we do this is blah blah.
+raspberry - 0
+blueberry - 1
+strawberry - 2
+Denoting numbers like this can imply a relationship where one does not exist, since these numbers are considered ordinal values; they imply some order in the data. Real world consequences of this might be that the network decides that a blueberry is something that is halfway between a raspberry and a strawberry, or that a strawberry is the "best" of the berries.
 
-So what is a tensor? Let's talk tensors.
+Strawberry Inception
 
-Let's look at them in code.
+To prevent these incorrect assumptions we use a process called "one hot encoding", resulting in data that looks like:
 
-```
-tf.tensor1d();
-```
+raspberry  - [1, 0, 0]
+blueberry  - [0, 1, 0]
+strawberry - [0, 0, 1]
+(Two great articles that go into more depth on one hot encoding are here and here.) We can leverage Tensorflow.js's built in oneHot functions to translate our labels:
 
-You can't console.log a tensor effectively. You can print it, or you can dataSync it.
+function oneHot(labelIndex, classLength) {
+  return tf.tidy(() => tf.oneHot(tf.tensor1d([labelIndex]).toInt(), classLength));
+};
+This function takes a particular number (labelIndex, a number that corresponds to a label) and translates it to a one hot encoding, given some number of classes (classLength). We can use the function with the following bit of code, that first builds a mapping of numbers-to-labels off the incoming array of labels, and then builds a Tensor containing those one-hot encoded labels:
+
+
+## Data Augmentation
+
+Neural networks thrive on data, yet sometimes it is a challenge to find enough data for your models. In these cases you can **augment** your data to expand your dataset.
+
+Augmentation is simply transforming your data in such a way that it provides alternative versions of the same data, while still falling within the parameters of what the neural network expects. For example, if you're training a network to recognize animals, you might take an image of a horse:
+
+[HORSE]
+
+And try various rotations, zooms, and flipping horizontally:
+
+[AUGMENTATIONS]
+
+On the other hand, you probably wouldn't want to do this:
+
+[VERTICAL AUGMENTATION]
+
+You probably won't be seeing many upside down horses (unless your users are out to screw you, in which case you might!)
+
+But it does depend on your use case. For instance, if you're trying to recognize topological features from satellite imagery, both vertical and horizontal flipping *would* make sense.
+
+This is one area I think it pays to bring your creativity to bear. For instance, in a project I'm working on, I'm trying to recognize laughter in television shows. Mixing tracks of laughter in with random talkings produces a lot of synthetic data.
+
+One thing to keep in mind when working with augmentations is to build your pipeline so that you're not augmenting your validation and test data (unless you intend to transform your predictive data as well - dunno why'd you do that). This can lead to some complicated use cases which are up to you to solve. Good luck buddy.

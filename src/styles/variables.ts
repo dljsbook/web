@@ -9,9 +9,11 @@ export const lighten = (color: string, amount: number) => {
   return `hsl(${h}, ${s}%, ${parseInt(l, 10) + amount}%)`;
 };
 
+const HUE = 206;
+
 export const colors = {
-  brand: 'hsl(210, 10%, 23%)',
-  strongBrand: 'hsl(210, 100%, 68%)',
+  brand: `hsl(${HUE}, 10%, 23%)`,
+  strongBrand: `hsl(${HUE}, 100%, 68%)`,
 
   categories: [
     [199, 100, 57],

@@ -6,54 +6,154 @@ description: "On the catwalk yeah, on the catwalk"
 
 ---
 
+Finally, we come to the architecture of our model.
+
+In this section, we'll discuss the parts that make up a neural network, and how they're capable of learning complex features. We'll also discuss a particular subdomain of Deep Learning - Transfer Learning - that holds particular relevance to us as Javascript programmers, folks interested in deploying these models in a browser, or anyone looking to bring the power of Deep Learning to tiny datasets.
+
 ## The component parts
 
-Neurons
+Neural networks get their names from the unit they're made out of, **neuron**s. A neuron is an analogue to a biological neuron, although in my opinion, even though their human cousins may have served as the initial inspiration, they're so fundamentally different that its better to think of them as totally a new thing.
 
-Weights
+[IMAGE OF A NEURON]
 
-Layers
+Some number of neurons make up a **layer**.
 
-Optimizer
+[IMAGE OF A LAYER]
+
+Neurons in one layer connect to neurons in another layer via a weight (this is the value that is tweaked during training, and affect the numbers coming in):
+
+[IMAGE OF TWO CONNECTED LAYERS]
+
+If all the neurons in one layer are connected to all the neurons in another layer, this is called a fully connected layer. Another name for this is a **dense** layer. (There are other architectures that we won't cover in this book).
+
+Let's see an overview of a relatively simple neural network:
+
+[DIAGRAM]
+
+Here we've got three layers. First layer is an input layer. Last layer is our output layer - this corresponds to the number of classes we'll have.
+
+The middle layer is what's known as a **hidden layer**. You only have a single input and output layer, but you can have any number of hidden layers.
+
+Input data comes in on the left, undergoes a transformation within the network, and comes out the right as a "prediction". Specifically, they get multiplied by some weights, undergo an activation function within the neuron, and keep going.
+
+What is an activation function? An activation function enables neural network to learn nonlinear features of datasets. This is key to enabling them to do much.
 
 ## Non Linearity
 
-An oft-repeated claim from traditional machine learning folks is that traditional statistical methods outperform in many cases deep learning. They're also faster and more interpretable.
+For all the hype around deep learning, the truth is that for any problem for which there's an equally valid approach - a statistical method, an algorithm - its almost always better to use that instead of deep learning. The Neural Network is an absurdly heavy hammer in search of very specific nails.
 
-This is all true. Take this linear shit:
+Deep Learning requires more data, is slower to train, and produces highly uninterpretable models. However, for nonlinear data, you need it.
 
-linear
+Deep Learning models shine in two cases: where feature engineering is undesirable, and where the data is nonlinear.
+
+Let's demonstrate what linear data is. Here you go:
+
+[linear]
 
 You do linear regression on it and you're done.
 
-Where deep learning shines is with non linear data and where you don't want to do feature engineering.
+This is an example of non linear data:
 
-The reason deep learning is capable of learning non linear data is because of activation functions. Let's look at a few:
+[moons]
 
-Activation Functions
+[clusters]
 
-So let's take some sample moons data and see how it does.
+These datasets take advantage of deep learning's particular model topologies to be learnable.
+
+The particular mechanism that makes this possible is an **activation function**. An activation function is a function that takes some numeric input and transforms into some numeric output.
+
+Here's a few examples of common activation functions:
+
+[RELU] [SIGMOID] [TANH]
+
+> If we only allow linear activation functions in a neural network, the output will just be a linear transformation of the input, which is not enough to form a universal function approximator. Such a network can just be represented as a matrix multiplication, and you would not be able to obtain very interesting behaviors from such a network.
+
+-https://stackoverflow.com/questions/9782071/why-must-a-nonlinear-activation-function-be-used-in-a-backpropagation-neural-net
+
+Activation functions sit within neurons.
 
 ## Transfer Learning
 
-What they are
+One of the neatest areas of Deep Learning is the concept of **Transfer Learning**.
 
-How to find them and understand them
+Transfer Learning is the special sauce that makes it possible to train extremely accurate models in your browser in a fraction of the time. Models are trained on large corpuses of data, and saved as pretrained models. Those pretrained models' final layers can then be tuned to your specific use case. You can "transfer" the generalized learning that these large models have learned over a large corpus, and tweak them to your particular use case.
 
-How to build a new model on top of them.
+This works particularly well in the realm of computer vision, because so many features of images are generalizable. Rob Fergus and Matthew Zeiler demonstrate in their paper the featured learned at the early stages of their model.
 
+At low levels, Mobilenet is beginning to recognize generic features, including lines, circles, and shapes, that are applicable to any set of images. After a few more layers, it's able to recognize more complex shapes like edges and words.
 
+The vast majority of images share general features such as lines and circles. Many share higher level features, things like an "eye" or a "nose". This allows you to reuse the existing training that's already been done, and tune just the last few layers on your specific dataset, which is faster and requires less data than training from scratch.
 
+How much less data? It depends. How different your data is from your pre-trained model, how complex or variable your data is, and other factors can all play into your accuracy. With the example above I got to 100% accuracy with 30 images. For something like dogs and cats, just a handful of images is enough to get good results. Adrian G has put together a more rigorous analysis on his blog.
 
+### Formats
 
+There's a number of formats you might find them in. They are:
 
+* keras
+* frozen model
+* tensorflowhub
 
----
+As of this writing there's no central repository of pretrained models I'm aware of. You have to find them yourself.
 
-Transfer learning
+### Understanding Pretrained Models
+
+Let's say you've found the perfect model - its well built on a wide corpus of data that perfectly matches your use case. How do you know how to use it? Let's take Mobilenet as an example and see how to examine it.
+
+There should usually be some information provided with the model. For instance, mobilenet comes with a `pbtxt` file, the beginning of which describes the input shape it expects:
+
+```
+ attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 224
+        }
+        dim {
+          size: 224
+        }
+        dim {
+          size: 3
+        }
+      }
+    }
+  }
+```
+
+This tells us that the first layer of this MobileNet expects to receive a Tensor of Rank 4 with dimensions [any, 224, 224, 3].
+
+We can also inspect the shape of the model:
+
+```
+```
+
+We see that the final layer that makes sense is --. We can also inspect each layer one by one:
+
+[Inspecting each layer of mobilenet]
+
+We now have a choice. We can either build a model using the pretrained model as its base, and just add our own layers onto the end; or we can keep the pretrained model separate from our model.
+
+The latter has the benefit that you can make your inferences at data load time, aka, you can "activate" the images when you get them. This could save some processing time especially with very many images.
+
+On the other hand, it introduces complexity into the code, and makes it more difficult to package and send around your model.
+
+The flexibility lets you make the call.
+
+<br /><br /> <br /><br /> <br /><br /> <br /><br />
+<br /><br /> <br /><br /> <br /><br /> <br /><br />
+<br /><br /> <br /><br /> <br /><br /> <br /><br />
+<br /><br /> <br /><br /> <br /><br /> <br /><br />
+<br /><br /> <br /><br /> <br /><br /> <br /><br />
 
 [AT SOME POINT IN CNNs: TALK ABOUT MNIST]
 
 Talk about convolutional networks
 
-Talk about activation functions, and how networks are put together. Revisit training and discuss forward and back propagation.
+
+
+
+
