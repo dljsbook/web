@@ -6,59 +6,80 @@ description: "Oh, the data you'll meet"
 
 ---
 
-All neural nets begin with data, on both a conceptual level and a physical level.
+All neural nets begin with data.
 
-A neural net, at its core, is just a set of mathematical functions - theory represented in code. Neural nets only come "alive" in the presence of data.
+At its heart, a neural network is simply a set of mathematical functions, theory in code. Neural nets only come "alive" in the presence of data.
 
 What is data? Data are the things you measure, the things you make predictions on.
 
 Data can be anything representable in numeric form in a computer. It can be numbers, or tabular data. It can be images, audio, or video. It can be text, PDFs, documents, webpages. It can be laser recordings from the top of autonomous cars, EMRs from medical devices, even EKGs from brain waves. If it can be represented in numerical form - and really, anything we can measure is capable of becoming numeric - then it can be data.
 
-The particular nature of your data will dictate everything about the Neural Network that you build.
+The particular nature of your data dictates everything about the Neural Network that you build.
 
 ## The Platonic Dataset
 
-What defines a good dataset? Your dataset should be as close as possible to your expected data. In particular, you should keep in mind three things. A dataset should be:
+What defines a good dataset? The answer is "it depends".
 
-* Representative
-* Well-balanced
-* Shuffled
+Usually, more data is better. But if you're working on a problem that is well understood and well solved, you'll need less. If you're working on a fairly novel problem, you'll need more. If you're working on some exotic data form, you'll need even more.
+
+There are three things you'll want to keep in mind when gathering data: your dataset should be **representative**, it should be **well-balanced**, and it should be **shuffled**.
 
 Let's examine each of these.
 
 ### Representative
-One thing that's important is to provide data that is representative of the data you wish to see. For instance, if your training data consists of well-lit data like:
+It is important that the dataset you use to train your network be *as similar as possible* to the data the network will be predicting upon. That is, it is **representative** of the eventual dataset used for prediction.
+If your training data consists of well-lit data like:
 
 ![Categories of data](categories.svg)
 
-yet the data you predict on looks like:
+But the data it predicts on is more like:
 
 ![Prediction](pred.svg)
 
-the machine will struggle to predict successfully.
+The network will struggle to predict successfully.
 
-Commonly with image data, a non-representative dataset will appear when a model is trained only with well-lit, high quality photography, only to receive grainy, low resolution uploaded photos from users. In this case, the model often fails to correctly identify and classify photos. 
+A common example of a non-representative dataset in image recognition is when a network is trained only with well-lit, high quality photography, yet when it is deployed in production, receives grainy, low resolution uploaded photos from users.
 
-Remember, a neural net brings no common sense to the table. It only knows what it sees during training. It'd be like training your dog to "Sit!" on command, then switch from English to Spanish and expect her to understand.
+This is like training your dog to "Sit!" and then switching from English to Spanish, expecting her to understand.
+
+A neural network brings no inherent common sense to the table. The only things it learns are from the examples you provide it. Therefore, strive to provide as representative a sample of data as possible.
+
+> Ruler detector  AI trained to classify skin lesions as potentially cancerous learns that lesions photographed next to a ruler are more likely to be malignant.  Andre Esteva et al, 2017  Dermatologist-level classification of skin cancer with deep neural networks https://www.nature.com/articles/nature21056.epdf 
 
 ### Well-Balanced
-You also want your dataset to be well balanced. You want as close to the same number of data points per category. If one category is overrepresented, you have an **unbalanced dataset**. An unbalanced dataset can lead to problems with prediction. For instance, if 90% of your data belongs to category one, your model might very well learn to assume that everything belongs to category one. After all, 90% of the time, it'll be right 100% of the time!
+A **well-balanced** dataset means that all categories in the dataset are of roughly equal number.
+
+If one category is overrepresented in your data, you have an **unbalanced dataset**.
 
 ![Balanced vs. unbalanced dataset](balanced-datasets.svg)
 
+An unbalanced dataset can lead to problems with prediction. For instance, assume 90% of your data belongs to category one, and 10% to category two. Rather than learning the specific traits of your data, your model might very well learn to assume that a better strategy is to predict everything as belonging to category one. This will net it a 90% success score!
+
+What do you do if one category inherently has more data?
+
+There are a few strategies. You can oversample from the smaller category - in essence, just copy and paste data randomly. If you have enough data, you can reduce the size of the overabundance category. Finally, you can use data augmentation techniques to create new data and seek to balance the categories that way. We'll discuss data augmentation later.
+
 ### Shuffled
-Finally, every time you train, your data should be shuffled anew.
 
-You want to prevent the network from learning any specific patterns that might be inherent in your training data. These patterns will almost certainly not be present when you go to predict. A common way this can happen is when categories are concatenated one after the other, and the model learns to predict based on where it is in the dataset.
+Every time you train your model, you should take care that your data is **shuffled**, meaning your data is sorted randomly each training cycle.
 
-If you always train your dog to sit, lie down, and play dead in the same order, after a while, the dog will begin to anticipate the moves, instead of learning to associate the commands with the actions. She will expect a treat and you will have no one but yourself to blame.
+*(be careful to use the same sorting order for both your labels and your features).*
 
-Shuffling your data breaks the ability to learn those associations, and will strengthen the connections that we actually want it to learn.
+You want to prevent the network from learning specific patterns that might be inherent in your training data. These patterns will almost certainly not be present when you go to predict, and will stump your network in production.
 
 ![Shuffled](shuffled.svg)
 
+If you always train your dog to sit, lie down, and play dead in the same order, the dog will start to anticipate the pattern of moves, instead of learning to associate each command with a specific action.
 
-## How is data stored and processed
+Shuffling your data breaks the ability to learn those associations, and will strengthen the connections that we actually want the network to learn.
+
+In practice, a common way this can occur is if your categories are concatenated one after another. The model learns to predict the category based on which categories have come before. This precise scenario occurred in an image classification study by Ellefsen et all, where neural nets learned to classify edible or poisonous mushrooms that were presented in alternated order, failing to actually recognize any features of the images themselves.
+
+> Data order patterns | Neural nets evolved to classify edible and poisonous mushrooms took advantage of the data being presented in alternating order, and didn't actually learn any features of the input images | Ellefsen et al, 2015 | Neural modularity helps organisms evolve to learn new skills without forgetting old skills | http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004128 | 
+
+> https://kottke.org/18/11/how-ai-agents-cheat
+
+## Storing and Processing Data
 
 Neural networks operate on numbers, so any data you provide must first be transformed into numeric form.
 

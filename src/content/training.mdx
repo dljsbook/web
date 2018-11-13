@@ -6,8 +6,9 @@ description: "An Overview of the Training Process of a Neural Net"
 
 ---
 
+Training refers to sending data through the neural network in an effort to tune its weights to make better predictions.
 
-Training a computer is sort like training a dog. We'll ride this metaphor as far as it'll take us.
+The process has some surface level similarity to training a dog, in three ways.
 
 When training a dog, first, the dog has to demonstrate the behavior you're trying to train. For instance, if you're training them to sit - let's call this an **example**. Once the dog has done the behavior, you give the dog some **reward**, like a treat. In this way, the **example** is associated with a **reward**. You then repeat this process, over and over, until the dog gets it. This **repetition** helps cement the link between the behavior and the expected reward.
 
@@ -15,18 +16,23 @@ It turns out that these three things are also used to train a machine. Let's exa
 
 ## Examples
 
-When you train a dog, you need examples of the behavior you wish to reward. Similarly, with a neural network, you compile a list of examples that demonstrate what you wish the network to learn. These examples comprise your total dataset.
+When you train a dog, you need to provide examples of the behavior you wish to reward, and teach the dog to associate each example with a command.
 
-Often (though not always), you will split your data into buckets randomly. The buckets are called Train, Test, and Validation sets.
+Similarly, with a neural network, you compile a list of examples that demonstrate what you wish the network to learn, and you teach the network to associate each example with a label.
+
+In the previous chapter, we discussed what makes up a good dataset, namely that it be representative, balanced, and shuffled. Your dataset includes the examples that you feed to the network for training, along with the labels for each datum.
+
+How do you know that your network is, say, learning the features of your data, and not something you don't want it to?
+
+You measure that by setting aside chunks of your dataset as **test data** and **validation data**. These separate buckets provide you an unbiased sample by which to measure your network.
 
 https://towardsdatascience.com/train-validation-and-test-sets-72cb40cba9e7
 
-
-You've got a well balanced training dataset that you're shuffling consistently, and its representative of your real life data. How do you know how well your model is performing on this data? You can measure this by setting aside chunks of your dataset as **test data** and **validation data**.
-
 ### Training Data
 
-This is the bulk of your dataset; this is the data your model consumes and learns from.
+This bucket comprises the bulk of your dataset. This is the data your model consumes and learns from.
+
+Assuming you have no need to measure the performance of your network, this bucket will comprise the entirity of your dataset.
 
 ### Test Data
 
@@ -57,28 +63,23 @@ Anyways - we're now giving the model a tensor of input values, and a tensor of l
 
 Iteration, hyperparameters (learning rate)
 
-You wouldn't expect your dog to learn a trick on the first try; hell, sometimes not even on the hundredth try. Similarly, a neural network needs to work through many attempts before it's able to hone on correct answers.
+You wouldn't expect your dog to learn a trick on the first try. Similarly, a neural network needs to work through many attempts before it's able to land on the correct answers.
 
-The training process is an **iterative** one. It takes multiple cycles of training to get better. The more data, and the more complex the data, the more cycles of training you will need. The more complex the model, the more cycles of training you need. The more accurate you want your model to be, the more cycles of training you will need (up to a point - too many cycles can actually
-lead to overfitting which we will touch on later).
+The training process is an **iterative** process. It takes multiple cycles of training to get better. The more data, and the more complex the data, the more cycles of training you will need. The more complex the model, the more cycles of training you need. The more accurate you want your model to be, the more cycles of training you will need (up to a point - too many cycles can actually lead to overfitting which we will touch on later).
 
 Let's see an example. Here's a simple line with a slope of 2.
 
-[LINE] - maybe you can modify slope and intercept?
+[LINE]
 
-If I ask you to look at this line and predict the value of **Y** if **X** is 5, you could figure it the answer was 10 just by looking at the line. Our neural net cannot do this. Remember, it has no inherent intelligence - no ability to deduce using reasoning and logic. The only way it can learn is iteratively, through repeated training on data that we feed it.
+If I ask you to look at this line and predict the value of **Y** if **X** is 5, you could figure it the answer was 10 just by looking at it. Our neural network cannot do this. Remember, it has no inherent intelligence - no ability to use reasoning or logic. The only way it learns is iteratively, through repeated training on data that we feed it.
 
 With this, you can hover over the graph to see what the model predicts a value at. Click to leave a point on the graph.
 
 [GRAPH]
 
-In its default state, the network makes random predictions. That's because the component parts of the neural network are initialized randomly. The component parts in this case are the "weights". What are weights?
+In its default state, the network makes random predictions. That's because the component parts of the neural network are initialized randomly.
 
-Weights make up a large part of what neural nets do. Here's a live diagram:
-
-[NN]
-
-Change weights. See what that does to different input values. These weights* are the things that the neural network changes as it trains. *There are also biases.
+*The component parts in this case are the "weights". What are weights? Weights make up a large part of what neural nets do. Here's a live diagram: Change weights. See what that does to different input values. These weights are the things that the neural network changes as it trains. There are also biases.*
 
 Let's go back to our line. It's pretrained. You can slide the slider to see the predictions and how they change over time.
 
@@ -96,31 +97,17 @@ In general, the more cycles of training you can afford, the better the model wil
 
 Speaking of blocking the UI, tfjs provides two important memory management methods:
 
-tf.tidy
 tf.awaitFrame
 
 use them.
 
+*Why don't we want to just take a big leap? Iteration is the key. You could overshoot. Let's see an example - if we had a huge learning rate. In fact, you can play with the learning rate.*
 
 ## Rewards
 
-Loss
+Rewards are what makes training possible. For dogs, its usually food. For neural networks, its a thing called **loss**.
 
-Forward and backward propagation
-
-
-* here, dig into loss, and other goodies
-    * explain how forward propagation works. how does a network wind up with a prediction?
-        * expanding tensor dimensions, and concatenating
-    * talk about how loss is the sum of the differences
-        * talk about how you want to minimize loss, and how you do that with gradient descent
-        * talk about what kinds of losses there are
-
-[Comic of dog with human saying a bunch of nonsense, and dog listening for the food parts]
-
-Rewards are what makes training possible. For dogs, its food. For neural networks, its something called **loss**.
-
-Loss is a measure of how wrong a network's predictions are. The network is incentivized to reduce loss as much as possible; that's its reward. (Pretty meager, I know; who am I to judge what motivates a computer!)
+Loss is a measure of how wrong a network's predictions are. The network is incentivized to reduce loss as much as possible. That's its reward.
 
 Let's go back to our line example, and see our loss for epoch 0:
 
@@ -132,13 +119,23 @@ Then, let's see it at epoch 1:
 
 As is evident, the loss from epoch 1 is lower than epoch 0. The network is "learning".
 
-Here's some formal terms for ya: **forward propagation** is sending numbers through the network, and **backwards propagation** is basically sending data backwards through the network. This backwards step is how the network trains.
+Loss, formally, is the sum of the difference of predicted outcomes from actual outcomes. So there's no sort of set scale to it, but in almost all cases you want it to trend towards 0 over time.
+
+*Here's some formal terms for ya: **forward propagation** is sending numbers through the network, and **backwards propagation** is basically sending data backwards through the network. This backwards step is how the network trains.*
 
 Let's see a simple example. We start with totally randomized weights. We then send some numbers through the network. We get our loss. We then adjust the weights some large amount, TIMES what's called the learning rate. Learning rate represents a **hyperparameter** - an argument you can tune in the network to get better results. There's no right answer for what this should be, but there are guidelines.
 
-Why don't we want to just take a big leap? Iteration is the key. You could overshoot. Let's see an example - if we had a huge learning rate. In fact, you can play with the learning rate.
-
 So we're tweaking the weights. What are weights? Well, that leads us into our next section: the architecture of your model.
+
+https://kottke.org/18/04/the-lebowski-theorem-of-machine-superintelligence
+
+
+
+
+[Comic of dog with human saying a bunch of nonsense, and dog listening for the food parts]
+
+
+
 
 
 ---

@@ -10,15 +10,31 @@ Finally, we come to the architecture of our model.
 
 In this section, we'll discuss the parts that make up a neural network, and how they're capable of learning complex features. We'll also discuss a particular subdomain of Deep Learning - Transfer Learning - that holds particular relevance to us as Javascript programmers, folks interested in deploying these models in a browser, or anyone looking to bring the power of Deep Learning to tiny datasets.
 
-## The component parts
+## Components of a Neural Network
 
-Neural networks get their names from the unit they're made out of, **neuron**s. A neuron is an analogue to a biological neuron, although in my opinion, even though their human cousins may have served as the initial inspiration, they're so fundamentally different that its better to think of them as totally a new thing.
+Neural Networks, just like a human brain, are made up of component pieces. The similarities mostly end there, as the pieces of a neural network, though inspired by the biological brain, are fundamentally different.
+
+### Neurons
+
+**Neurons** form the basis of neural networks and are where they get their name. In code, a neuron is often referred to as a **unit**.
+
+A neuron is an analogue to a biological neuron, although in my opinion, even though their human cousins may have served as the initial inspiration, they're so fundamentally different that its better to think of them as totally a new thing.
 
 [IMAGE OF A NEURON]
 
-Some number of neurons make up a **layer**.
+### Layers
 
-[IMAGE OF A LAYER]
+A collection of neurons makes up a **layer**.
+
+Let's see an overview of a relatively simple neural network:
+
+[DIAGRAM]
+
+Here we've got three layers. First layer is an input layer. Last layer is our output layer - this corresponds to the number of classes we'll have.
+
+The middle layer is what's known as a **hidden layer**. You only have a single input and output layer, but you can have any number of hidden layers.
+
+### Weights
 
 Neurons in one layer connect to neurons in another layer via a weight (this is the value that is tweaked during training, and affect the numbers coming in):
 
@@ -30,10 +46,6 @@ Let's see an overview of a relatively simple neural network:
 
 [DIAGRAM]
 
-Here we've got three layers. First layer is an input layer. Last layer is our output layer - this corresponds to the number of classes we'll have.
-
-The middle layer is what's known as a **hidden layer**. You only have a single input and output layer, but you can have any number of hidden layers.
-
 Input data comes in on the left, undergoes a transformation within the network, and comes out the right as a "prediction". Specifically, they get multiplied by some weights, undergo an activation function within the neuron, and keep going.
 
 What is an activation function? An activation function enables neural network to learn nonlinear features of datasets. This is key to enabling them to do much.
@@ -42,7 +54,7 @@ What is an activation function? An activation function enables neural network to
 
 For all the hype around deep learning, the truth is that for any problem for which there's an equally valid approach - a statistical method, an algorithm - its almost always better to use that instead of deep learning. The Neural Network is an absurdly heavy hammer in search of very specific nails.
 
-Deep Learning requires more data, is slower to train, and produces highly uninterpretable models. However, for nonlinear data, you need it.
+Deep Learning requires more data, is slower to train, and produces highly uninterpretable models. However, the one use case in which they shine - and which encompass a startinlingly large array of problems - is around nonlinear data.
 
 Deep Learning models shine in two cases: where feature engineering is undesirable, and where the data is nonlinear.
 
@@ -139,7 +151,7 @@ We now have a choice. We can either build a model using the pretrained model as 
 
 The latter has the benefit that you can make your inferences at data load time, aka, you can "activate" the images when you get them. This could save some processing time especially with very many images.
 
-On the other hand, it introduces complexity into the code, and makes it more difficult to package and send around your model.
+On the other hand, it introduces complexity into the code, and makes it more difficult to package and send around your model. (They're not portable).
 
 The flexibility lets you make the call.
 
