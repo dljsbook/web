@@ -8,27 +8,42 @@ description: "Oh, the data you'll meet"
 
 All neural nets begin with data.
 
-At its heart, a neural network is simply a set of mathematical functions, theory in code. Neural nets only come "alive" in the presence of data.
+At its core, a neural network is simply a set of mathematical functions; theory drawn in code. Neural nets only come alive in the presence of data.
 
-What is data? Data are the things you measure, the things you make predictions on.
+What is data? Data is the stuff you measure, collect, manipulate, and ultimately make predictions upon.
 
-Data can be anything representable in numeric form in a computer. It can be numbers, or tabular data. It can be images, audio, or video. It can be text, PDFs, documents, webpages. It can be laser recordings from the top of autonomous cars, EMRs from medical devices, even EKGs from brain waves. If it can be represented in numerical form - and really, anything we can measure is capable of becoming numeric - then it can be data.
+Data can be anything capable of being represented in numeric form in a computer. That includes a whole lot. Obviously numbers, like that found in spreadsheets or database tables, can be data.
+
+[SPREADSHEET DATA]
+
+Images are another common source of data:
+
+[IMAGE DATA]
+
+Audio and video are also commonly seen:
+
+[AUDIO and VIDEO data]
+
+Text, PDFs, documents, webpages - anything with text is data:
+
+[TEXT data]
+
+Laser recordings from the tops of autonomous cars, EMRs from medical devices, even EKGs from brain waves are data. If it can be represented in numerical form - and really, anything we can measure is capable of a numeric representation - then it can be data.
 
 The particular nature of your data dictates everything about the Neural Network that you build.
 
 ## The Platonic Dataset
 
-What defines a good dataset? The answer is "it depends".
+Mostly we discuss data in aggregate, as a dataset.
 
-Usually, more data is better. But if you're working on a problem that is well understood and well solved, you'll need less. If you're working on a fairly novel problem, you'll need more. If you're working on some exotic data form, you'll need even more.
+What defines a good dataset? It depends.
 
-There are three things you'll want to keep in mind when gathering data: your dataset should be **representative**, it should be **well-balanced**, and it should be **shuffled**.
+More data is usually better. But if you're working on a well understood or well solved problem, you can get by with less. If the problem is novel, you'll need more. If you're working with some exotic data form, you'll probably need a lot more.
 
-Let's examine each of these.
+Regardless of the size and composition of your dataset, you should take care of three considerations when compiling your dataset: it should be **representative**, it should be **well-balanced**, and it should be **shuffled**.
 
 ### Representative
-It is important that the dataset you use to train your network be *as similar as possible* to the data the network will be predicting upon. That is, it is **representative** of the eventual dataset used for prediction.
-If your training data consists of well-lit data like:
+It is important that the dataset you use to train your network be *as similar as possible* to the data the network will be predicting upon. That is, that it be **representative** of the eventual dataset used for prediction. If your training data looks like:
 
 ![Categories of data](categories.svg)
 
@@ -92,6 +107,12 @@ Most Deep Learning frameworks expect data in the form of tensors. Tensors are a 
 Tensors contain data, but they also have dimension, shape, type, and describe valid transformations. In particular, the dimension - also known as a tensor's rank - is important to understand. A tensor's shape is tied to that and is also important. Here's a [3x3x3] tensor:
 
 [IMAGE OF TENSOR]
+
+You can create a tensor with:
+
+```
+tf.tensor1d([1, 2]);
+```
 
 Tensors are backed up, in Javascript, by `TypedArray`s.
 

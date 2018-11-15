@@ -19,6 +19,8 @@ const HeaderInner = styled(Container)`
   flex-direction: row;
   align-items: center;
   height: 100%;
+  max-width: 76%;
+  margin: 0;
 `;
 
 const HomepageLink = styled(Link)`
@@ -52,6 +54,16 @@ const StyledNavLink = styled(Link)`
     text-decoration: none;
     color: rgba(255,255,255,.8);
   }
+
+  &:last-child {
+    padding-right: 0;
+  }
+`;
+
+const Right = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
 `;
 
 const NavLink = (props: any) => (
@@ -69,11 +81,13 @@ const Header: React.SFC<HeaderProps> = ({ title }) => (
         <img src={logo} />
         {title}
       </HomepageLink>
-      <NavLink to="/introduction">Introduction</NavLink>
-      <NavLink to="/data">Data</NavLink>
-      <NavLink to="/training">Training</NavLink>
-      <NavLink to="/models">Models</NavLink>
-      <NavLink to="/resources">Resources</NavLink>
+      <Right>
+        <NavLink to="/introduction">Introduction</NavLink>
+        <NavLink to="/data">Data</NavLink>
+        <NavLink to="/training">Training</NavLink>
+        <NavLink to="/models">Models</NavLink>
+        <NavLink to="/resources">Resources</NavLink>
+      </Right>
     </HeaderInner>
   </StyledHeader>
 );

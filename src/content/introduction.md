@@ -7,6 +7,10 @@ description: "A definition of terms, history, and use cases of Deep Learning"
 
 ---
 
+https://www.technologyreview.com/s/612404/is-this-ai-we-drew-you-a-flowchart-to-work-it-out/
+
+> Machine learning to determine when someone is talking, or when someone is typing
+
 ## Who This Is For
 
 This is a book for Javascript Developers interested in Deep Learning.

@@ -2,12 +2,13 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import { graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { MDXProvider } from "@mdx-js/tag";
 
 import Page from '../components/Page';
 import Container from '../components/Container';
 import IndexLayout from '../layouts';
 import Jumbotron from '../components/Jumbotron';
-// import ToC from '../components/ToC';
+import ToC, { addAnchorLinks } from '../components/ToC';
 
 // interface PageTemplateProps {
 //   data: {
@@ -38,28 +39,34 @@ const Body = styled.div`
   padding-right: 30px;
 `;
 
+const DEPTH = 3;
+
 /* eslint-disable */
 const PageTemplate = ({ data, __mdxScope }) => {
   const post = data.mdx;
   return (
-    <IndexLayout>
-      <Jumbotron
-        title={post.fields.title}
-        description={post.fields.description}
-      />
-      <Page>
-        <Container>
-          <Body>
-            <MDXRenderer scope={__mdxScope}>
-              {post.code.body}
-            </MDXRenderer>
-          </Body>
-          { /*
-          <ToC contents={data.markdownRemark.tableOfContents} />
-          */ }
-        </Container>
-      </Page>
-    </IndexLayout>
+    <MDXProvider
+      components={{
+        ...addAnchorLinks(DEPTH),
+      }}
+    >
+      <IndexLayout>
+        <Jumbotron
+          title={post.fields.title}
+          description={post.fields.description}
+        />
+        <Page>
+          <Container>
+            <Body>
+              <MDXRenderer scope={__mdxScope}>
+                {post.code.body}
+              </MDXRenderer>
+            </Body>
+            <ToC contents={post.tableOfContents} depth={DEPTH} />
+          </Container>
+        </Page>
+      </IndexLayout>
+    </MDXProvider>
   );
 };
 
