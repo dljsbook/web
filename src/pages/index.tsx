@@ -113,7 +113,7 @@ const Question = ({
 
 const BuyButton = () => (
   <BuyContainer>
-    <Button href="https://gum.co/dljsbook">Pre-Order Your Copy</Button>
+    <Button href="https://gum.co/dljsbook?wanted=true">Pre-Order Your Copy</Button>
     <em>$9.95 until 11/25, then $19.95</em>
   </BuyContainer>
 );
