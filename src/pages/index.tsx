@@ -42,14 +42,12 @@ const Jumbotron = styled.div`
 
   h1 {
     color: rgb(31, 182, 255);
-  }
-
-  h1 {
-    font-size: 47px;
+    font-size: 44px;
 
     span {
-    color: white;
-    text-decoration: underline;
+      display: block;
+      color: white;
+      text-decoration: underline;
     }
   }
 
@@ -65,10 +63,14 @@ const Jumbotron = styled.div`
 const Headline = styled.h2`
   max-width: 800px;
   margin: 60px auto 100px auto;
-  font-size: 44px;
+  font-size: 50px;
   color: white;
   opacity: 1.0;
   text-align: center;
+
+  span {
+    color: rgb(31, 182, 255);
+  }
 `;
 
 const Body = styled.div`
@@ -87,8 +89,27 @@ interface ISectionProps {
 const Section = styled.div<ISectionProps>`
   background: white;
   color: rgba(0, 0, 0, 0.6);
+  padding: 40px 0;
+
   h1, h2, h3 {
     color: rgb(31, 182, 255);
+  }
+
+  h2 {
+    margin-bottom: 40px;
+    font-size: 50px;
+  }
+
+  li, p {
+    font-size: 20px;
+  }
+
+  li {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 20px;
   }
 
   ${props => props.blue ? `
@@ -130,7 +151,7 @@ const IndexPage = () => (
           <BuyButton />
         </Body>
       </div>
-      <Headline>Deep Learning With Javascript will teach you how to build a Neural Network in Javascript in your browser, today.</Headline>
+      <Headline><span>Deep Learning With Javascript</span> will teach you how to build a Neural Network in your browser, today.</Headline>
     </Jumbotron>
     <Section>
       <Contents>
