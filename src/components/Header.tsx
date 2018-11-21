@@ -12,6 +12,8 @@ const StyledHeader = styled.header`
   padding: 0 ${dimensions.containerPadding}rem;
   background-color: ${colors.brand};
   color: ${transparentize(0.5, colors.white)};
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: 1;
 `;
 
 const HeaderInner = styled(Container)`
@@ -44,31 +46,31 @@ const HomepageLink = styled(Link)`
   }
 `;
 
-const StyledNavLink = styled(Link)`
-  color: rgba(255,255,255,.5);
-  padding: 0.5rem;
-  font-size: .9rem;
-  margin-top: 4px;
+// const StyledNavLink = styled(Link)`
+//   color: rgba(255,255,255,.5);
+//   padding: 0.5rem;
+//   font-size: .9rem;
+//   margin-top: 4px;
 
-  &:hover {
-    text-decoration: none;
-    color: rgba(255,255,255,.8);
-  }
+//   &:hover {
+//     text-decoration: none;
+//     color: rgba(255,255,255,.8);
+//   }
 
-  &:last-child {
-    padding-right: 0;
-  }
-`;
+//   &:last-child {
+//     padding-right: 0;
+//   }
+// `;
 
-const Right = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-`;
+// const Right = styled.div`
+//   display: flex;
+//   flex: 1;
+//   justify-content: flex-end;
+// `;
 
-const NavLink = (props: any) => (
-  <StyledNavLink activeStyle={{ color: 'rgba(255,255,255,.8)'}} {...props} />
-);
+// const NavLink = (props: any) => (
+//   <StyledNavLink activeStyle={{ color: 'rgba(255,255,255,.8)'}} {...props} />
+// );
 
 interface HeaderProps {
   title: string;
@@ -81,6 +83,7 @@ const Header: React.SFC<HeaderProps> = ({ title }) => (
         <img src={logo} />
         {title}
       </HomepageLink>
+      { /*
       <Right>
         <NavLink to="/introduction">Introduction</NavLink>
         <NavLink to="/data">Data</NavLink>
@@ -88,6 +91,7 @@ const Header: React.SFC<HeaderProps> = ({ title }) => (
         <NavLink to="/models">Models</NavLink>
         <NavLink to="/resources">Resources</NavLink>
       </Right>
+      */ }
     </HeaderInner>
   </StyledHeader>
 );

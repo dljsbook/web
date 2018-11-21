@@ -9,6 +9,7 @@ import Container from '../components/Container';
 import IndexLayout from '../layouts';
 import Jumbotron from '../components/Jumbotron';
 import ToC, { addAnchorLinks } from '../components/ToC';
+import ImageClassifier from '$components/ImageClassifier';
 
 // interface PageTemplateProps {
 //   data: {
@@ -58,6 +59,7 @@ const PageTemplate = ({ data, __mdxScope }) => {
         <Page>
           <Container>
             <Body>
+              <ImageClassifier />
               <MDXRenderer scope={__mdxScope}>
                 {post.code.body}
               </MDXRenderer>
