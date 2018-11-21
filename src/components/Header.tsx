@@ -76,14 +76,15 @@ interface HeaderProps {
   title: string;
 }
 
-const Header: React.SFC<HeaderProps> = ({ title }) => (
+const ON = false;
+
+const Header: React.SFC<HeaderProps> = ({ title }) => ON ? (
   <StyledHeader>
     <HeaderInner>
       <HomepageLink to="/">
         <img src={logo} />
         {title}
       </HomepageLink>
-      { /*
       <Right>
         <NavLink to="/introduction">Introduction</NavLink>
         <NavLink to="/data">Data</NavLink>
@@ -91,9 +92,8 @@ const Header: React.SFC<HeaderProps> = ({ title }) => (
         <NavLink to="/models">Models</NavLink>
         <NavLink to="/resources">Resources</NavLink>
       </Right>
-      */ }
     </HeaderInner>
   </StyledHeader>
-);
+) : null;
 
 export default Header;
