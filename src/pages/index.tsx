@@ -122,7 +122,7 @@ const IndexPage = () => (
   <IndexLayout>
     <Jumbotron>
       <div>
-        <img src="/assets/dljscover.png" />
+        <img src="/dljscover.png" />
         <Body>
           <h1>Today is the day you build a <span>Neural Network</span> in Javascript.</h1>
           <p>Deep Learning is ushering in a sea change in the way we build software. Andrew Ng famously refers to AI as the "New Electricity": a change destined to become as ubiquitous as electricity, imbued in every product around us, that will revolutionize how we interact with technology.</p>
