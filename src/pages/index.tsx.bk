@@ -1,0 +1,140 @@
+import * as React from 'react';
+// import Page from '../components/Page';
+import IndexLayout from '../layouts';
+import styled from 'react-emotion';
+
+const Button = styled.button`
+    display: block;
+    padding: 20px 40px;
+    background: rgb(31, 182, 255);
+    color: white;
+    text-transform: uppercase;
+    width: 100%;
+    font-weight: bold;
+    font-size: 26px;
+    border: none;
+`;
+
+const Jumbotron = styled.div`
+  background-color: rgb(37,54,76);
+  min-height: 600px;
+  color: white;
+  padding: 40px;
+
+  > div {
+    display: flex;
+    flex-direction: row;
+    max-width: 800px;
+    margin: 40px auto;
+  }
+
+  h1, h2, h3 {
+    color: rgb(31, 182, 255);
+  }
+
+  img {
+    max-height: 450px;
+    box-shadow: 0 2px 18px rgba(0,0,0,0.6);
+    margin-right: 40px;
+    display: block;
+  }
+
+`;
+
+const Body = styled.div`
+`;
+
+
+const Contents = styled.div`
+  max-width: 800px;
+  margin: 40px auto;
+`;
+
+interface ISectionProps {
+  blue?: boolean;
+}
+
+const Section = styled.div<ISectionProps>`
+  background: white;
+  color: rgba(0, 0, 0, 0.6);
+  h1, h2, h3 {
+    color: rgb(31, 182, 255);
+  }
+
+  ${props => props.blue ? `
+  background: rgba(31,182,255,0.12);
+  ` : null}
+`;
+
+
+const IndexPage = () => (
+  <IndexLayout>
+
+    <Jumbotron>
+      <div>
+        <img src="/dljscover.png" />
+        <Body>
+          <h1>Learn to Use the Power of AI</h1>
+          <p>Artificial Intelligence is a game changer, and it's happening right now. However, getting started has often required deep knowledge of advanced math and statistics, along with a wide range of opaque and low-level tools.</p>
+          <p>Build Real Projects With AI will get you building actual, usable applications in your browser that leverage Artificial Intelligence, Deep Learning, and Machine Learning, with no math or statistics background required!</p>
+          <Button>Buy Your Copy</Button>
+          <p>$49.99 | $29.99</p>
+        </Body>
+      </div>
+    </Jumbotron>
+    <Section>
+      <Contents>
+        <h2>"Machine Learning is hard. How do you guys do it?"</h2>
+
+        <p>Been reading and studying a lot on data science, machine learning and deep learning for about 5~7weeks. I found it is very hard. To many things to learn and cover such as statistics, maths, programming. Programming is really hard for me. How long does it normally take to be proficient in python? I've been reading intro to ml and DL with Python but I found that everytime I have to simply manipulate the libraries used in the book such as sklearn (to loop between different range of parameters in kNN), I still cant do it. I've also been reading some codes in kaggle by some data scientists, but most of the codes use wide number of libraries and functions that I've never even heard of to clean, manipulate and visualize the data and model. I feel the learning curve for programming side of ML is too steep for me that I want to give up learning ML and data science.</p>
+
+        <p>- a discussion on Reddit</p>
+      </Contents>
+    </Section>
+    <Section blue>
+      <Contents>
+        <h2>BUILD REAL PROJECTS WITH AI</h2>
+        <p>One of the reasons getting up to speed with in the field is so difficult is because there's so much to learn at once. Many tutorials assume deep familiarity with advanced math and statistics, including linear algebra, matrix calculus, and numerical optimization. On top of that, there's an entire ecosystem in Python of tools specific to data science - things like numpy, scikit, pandas, and Jupyter notebooks, along with pre-existing statistical approaches to machine learning - that are yet another set of things to learn before you can start building.</p>
+        <p>Don't get me wrong - this ecosystem is amazing, and hugely useful. But when you’re just starting out, there’s nothing more demoralizing than spending hours struggling to understand a new concept and realizing you're weeks or months from a working prototype. You don't learn to play the piano by reading books for year on music theory; you play.</p>
+        <p>The best way to learn is to leverage that excitement that got you interested in the first place. I'm smitten with the possibilities AI affords us to explore our creativity. There’s nothing more invigorating than watching your creation come to life - especially when that creation leverages the mind blowing awesomeness of AI! </p>
+        <p>That's what this book offers: an opportunity to explore the fundamentals of AI with no math or statistics background assumed. We'll walk through a number of easily consumable, immediately useful applications of deep learning. You won't become an expert in the field (that'll take much longer!), but you will gain a foundation to build real working applications, now, and have a framework with which to continue exploring the field.</p>
+      </Contents>
+    </Section>
+    <Section>
+      <Contents>
+        <h3>Live Object Recognition</h3>
+        <p>Live image recognition is a huge value add, whether you're building a website or a mobile app. </p>
+        <p>It's also a perfect use case for something to build directly in the browser, so you're not streaming huge chunks of data to the server for processing and then sending them back.</p>
+        <p>We'll build a tool that can recognize images in real time.</p>
+        <h3>Text Prediction</h3>
+        <p>Predictive text can have huge productivity gains for users. With recent advances it's not hard to bring this to your app.</p>
+        <p>We'll walk through a simple app that leverages this technology, and show how you can build the same functionality into your website.</p>
+
+
+        <h3>Chatbots</h3>
+
+        <p>Chatbots have proliferated across Facebook Messenger and WeChat. While still in their nascency, a bit of artificial intelligence can go a long way to providing a superior user experience.</p>
+        <p>We’ll analyze users’ sentiment, and parse parts of speech to tease out what users are asking for and how best to respond. </p>
+        <h3>Filters</h3>
+
+        <p>Ever wonder how Snapchat filters work, or Google Hangouts slaps a mustache onto your face? </p>
+        <p>Wonder no more. We're gonna build that.</p>
+      </Contents>
+    </Section>
+    <Section>
+      <Contents>
+        <h2>The Author</h2>
+        <p>After more than ten years of experience building apps for brands like Venmo and GE Healthcare, I'm building bleeding-edge AI software.</p>
+        <p>I think AI tools are the most exciting development in technology since... well, since I've been working in the field! </p>
+        <p>The browser is an ideal medium for getting started with AI. Why?</p>
+        <p>Everybody has one. There's nothing to install.</p>
+        <p>It's interactive. You'll see the effects in real time.</p>
+        <p>Comes with sensors. Webcam, location, you name it.</p>
+        <p>Concentrate on what matters - building Real Projects with AI.</p>
+          <Button>Buy Your Copy</Button>
+      </Contents>
+    </Section>
+  </IndexLayout>
+);
+
+export default IndexPage;
