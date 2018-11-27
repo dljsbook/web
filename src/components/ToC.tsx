@@ -144,7 +144,7 @@ const List:React.SFC<IListProps> = ({ items, height, scroll, padding }) => {
 
   return (
   <StyledList>
-    {items.map((item) => {
+    {(items || []).map((item) => {
     return (
       <ListItem
         scroll={scroll}
