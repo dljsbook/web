@@ -17,10 +17,13 @@ injectGlobal`
   html {
     font-size: ${dimensions.fontSize.regular}px !important;
     line-height: ${dimensions.lineHeight.regular} !important;
+    width: 100%;
+    height: 100%;
   }
 
   body {
     width: 100%;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
     font-family: ${fonts.sansSerif};
@@ -28,6 +31,14 @@ injectGlobal`
     background-color: ${colors.white};
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+  }
+
+  body > div {
+    height: 100%;
+  }
+
+  body > div > div {
+    height: 100%;
   }
 
   a {
