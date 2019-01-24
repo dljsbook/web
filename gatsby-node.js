@@ -2,6 +2,7 @@
 'use strict'
 
 const path = require('path');
+const fs = require('fs');
 const { createFilePath } = require('gatsby-source-filesystem');
 const componentWithMDXScope = require('gatsby-mdx/component-with-mdx-scope');
 
@@ -59,6 +60,19 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 };
 
+const getLayout = layout => {
+  if (!layout) {
+    return path.resolve(`./src/templates/page.js`);
+  }
+
+  const template = path.resolve(`./src/templates/${layout}.js`);
+  if (fs.existsSync(template)) {
+    return template;
+  }
+
+  return path.resolve(`./src/templates/${layout}/index.js`);
+};
+
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
   return new Promise((resolve, reject) => {
@@ -72,7 +86,7 @@ exports.createPages = ({ graphql, actions }) => {
       result.data.allMdx.edges.forEach(({ node }) => {
         const { slug, layout } = node.fields;
         const nodePath = `/${node.parent.name}`;
-        const template = path.resolve(`./src/templates/${layout || 'page'}.js`);
+        const template = getLayout(layout);
         createPage({
           path: slug || nodePath,
           component: componentWithMDXScope(

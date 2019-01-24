@@ -1,52 +1,29 @@
 import * as React from 'react';
-import styled from 'react-emotion';
 import { graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import { MDXProvider } from "@mdx-js/tag";
+import {
+  Header,
+  Container,
+} from './components';
 
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  height: 100%;
-  background: black;
-  position: relative;
-
-  &:after {
-    content: "Loading";
-    color: white;
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    width: 100%;
-    margin-top: -100px;
-    z-index: 1;
-  }
-
-  > * {
-    flex: 1;
-  }
-
-  iframe {
-    position: relative;
-    z-index: 2;
-    width: 100% !important;
-    height: 100% !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    overflow: hidden;
-  }
-`;
-
-const Header = styled.div`
-  background: hsl(206,100%,68%);
-  color: white;
-  padding: 10px 20px;
-`;
-
+/* eslint-disable */
 const Body = ({ sandbox, body, mdxScope }) => {
   if (sandbox) {
-    const src = `https://codesandbox.io/embed/${sandbox}?autoresize=1&expanddevtools=1&hidenavigation=1`;
-    const options = 'allow-modals allow-forms allow-popups allow-scripts allow-same-origin';
+    const qs = [
+      'autoresize=1',
+      'expanddevtools=0',
+      'hidenavigation=1',
+    ];
+    const src = `https://codesandbox.io/embed/${sandbox}?${qs.join('&')}`;
+    const options = [
+      'allow-modals',
+      'allow-forms',
+      'allow-popups',
+      'allow-scripts',
+      'allow-same-origin',
+    ].join(' ');
+
     return (
       <iframe
         src={src}
@@ -62,7 +39,6 @@ const Body = ({ sandbox, body, mdxScope }) => {
   );
 };
 
-/* eslint-disable */
 const PageTemplate = ({ data, __mdxScope, ...rest }) => {
   const post = data.mdx;
   const {
