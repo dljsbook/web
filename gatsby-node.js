@@ -13,8 +13,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   // through `createNodeField` so that the fields still exist and GraphQL won't
   // trip up. An empty string is still required in replacement to `null`.
 
-  switch (node.internal.type) {
-  case 'MarkdownRemark': {
+  if (node.internal.type === 'MarkdownRemark') {
     const { permalink, layout } = node.frontmatter
     const { relativePath } = getNode(node.parent)
 
@@ -37,144 +36,58 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       name: 'layout',
       value: layout || ''
     })
-  }
-    break;
-  case 'Mdx': {
-    const slug = createFilePath({ node, getNode });
-    const title = node.frontmatter.title;
-    const date = node.frontmatter.date;
-    const description = node.frontmatter.description;
+  } else if (node.internal.type === 'Mdx') {
+    const {
+      slug,
+      path,
+      ...rest
+    } = node.frontmatter;
 
     createNodeField({
       node,
       name: `slug`,
-      value: slug,
+      value: path || slug || createFilePath({ node, getNode })
     })
 
-    createNodeField({
-      node,
-      name: `title`,
-      value: title,
-    })
-
-    createNodeField({
-      node,
-      name: `date`,
-      value: date,
-    })
-
-    createNodeField({
-      node,
-      name: `description`,
-      value: description,
-    })
-  }
+    Object.entries(rest).forEach(([name, value]) => {
+      createNodeField({
+        node,
+        name,
+        value,
+      })
+    });
   }
 };
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
   return new Promise((resolve, reject) => {
-    resolve(
-      graphql(
-        `
-          {
-            allMdx {
-              edges {
-                node {
-                  id
-                  fields {
-                    slug
-                    date(formatString: "DD MMMM, YYYY")
-                    title
-                    description
-                  }
-                  parent {
-                    ... on File {
-                      name
-                      sourceInstanceName
-                    }
-                  }
-                  code {
-                    scope
-                  }
-                }
-              }
-            }
-          }
-        `
-      ).then(result => {
-        if (result.errors) {
-          console.log(result.errors);
-          reject(result.errors);
-        }
-        // Create blog posts pages.
-        result.data.allMdx.edges.forEach(({ node }) => {
-          const { slug } = node.fields;
-          // const path = `/${node.parent.sourceInstanceName}/${node.parent.name}`;
-          const nodePath = `/${node.parent.name}`;
-          createPage({
-            path: nodePath,
-            component: componentWithMDXScope(
-              path.resolve('./src/templates/page.js'),
-              node.code.scope,
-            ),
-            context: {
-              id: node.id,
-              slug,
-            },
-          });
+    resolve(graphql(getAllMdxQuery()).then(result => {
+      if (result.errors) {
+        console.log(result.errors);
+        reject(result.errors);
+      }
+
+      // Create blog posts pages.
+      result.data.allMdx.edges.forEach(({ node }) => {
+        const { slug, layout } = node.fields;
+        const nodePath = `/${node.parent.name}`;
+        const template = path.resolve(`./src/templates/${layout || 'page'}.js`);
+        createPage({
+          path: slug || nodePath,
+          component: componentWithMDXScope(
+            template,
+            node.code.scope,
+          ),
+          context: {
+            id: node.id,
+            slug,
+          },
         });
-      })
-    );
+      });
+    }));
   });
 };
-// exports.createPages = async ({ graphql, actions }) => {
-//   const { createPage } = actions
-
-//   const allMarkdown = await graphql(`
-//     {
-//       allMarkdownRemark(limit: 1000) {
-//         edges {
-//           node {
-//             fields {
-//               layout
-//               slug
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `)
-
-//   if (allMarkdown.errors) {
-//     console.error(allMarkdown.errors)
-//     throw new Error(allMarkdown.errors)
-//   }
-
-//   allMarkdown.data.allMarkdownRemark.edges.forEach(({ node }) => {
-//     const { slug, layout } = node.fields
-
-//     createPage({
-//       path: slug,
-//       // This will automatically resolve the template to a corresponding
-//       // `layout` frontmatter in the Markdown.
-//       //
-//       // Feel free to set any `layout` as you'd like in the frontmatter, as
-//       // long as the corresponding template file exists in src/templates.
-//       // If no template is set, it will fall back to the default `page`
-//       // template.
-//       //
-//       // Note that the template has to exist first, or else the build will fail.
-//       component: path.resolve(`./src/templates/${layout || 'page'}.tsx`),
-//       context: {
-//         // Data passed to context is available in page queries as GraphQL variables.
-//         slug
-//       }
-//     })
-//   })
-// }
-//
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -184,3 +97,32 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     }
   });
 };
+
+const getAllMdxQuery = () => `
+  {
+    allMdx {
+      edges {
+        node {
+          id
+          fields {
+            sandbox
+            layout
+            slug
+            date(formatString: "DD MMMM, YYYY")
+            title
+            description
+          }
+          parent {
+            ... on File {
+              name
+              sourceInstanceName
+            }
+          }
+          code {
+            scope
+          }
+        }
+      }
+    }
+  }
+`;

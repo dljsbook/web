@@ -43,7 +43,7 @@ const Body = styled.div`
 const DEPTH = 3;
 
 /* eslint-disable */
-const PageTemplate = ({ data, __mdxScope }) => {
+const PageTemplate = ({ data, __mdxScope, ...rest }) => {
   const post = data.mdx;
   return (
     <MDXProvider
