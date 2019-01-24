@@ -193,7 +193,7 @@ const IndexPage = () => (
         <h2>FAQ</h2>
 
         <Question question="What happens after I purchase?">
-          <p>On December 23rd, you'll get an email delivery with the PDF, Kindle (.mobi), and .epub files. You'll also be subscribed to receive future updates of the book for free.</p>
+          <p>In February, you'll get an email delivery with the PDF, Kindle (.mobi), and .epub files. You'll also be subscribed to receive future updates of the book for free.</p>
         </Question>
 
         <Question question="Do I need a math or statistics background to use this book?">
