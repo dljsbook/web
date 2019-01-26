@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: book
 title: "Introduction"
 slug: "/introduction"
 date: "2018"
