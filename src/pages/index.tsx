@@ -151,7 +151,7 @@ const IndexPage = () => (
         <Body>
           <h1>Today is the day you build a <span>Neural Network</span> in Javascript.</h1>
           <p>Deep Learning is ushering in a sea change in the way we build software. Andrew Ng famously refers to AI as the "New Electricity": a change destined to become as ubiquitous as electricity, imbued in every product around us, that will revolutionize how we interact with technology.</p>
-          <p>Deep Learning has traditionally required vast server farms of specialized GPU chips, a PhD degree, and huge petabytes of data. Recently, however, - just this year, in fact - its become feasible to deploy and train cutting-edge Neural Networks in your browser, using Javascript. </p>
+          <p>Deep Learning has traditionally required vast server farms of specialized GPU chips, a PhD degree, and huge petabytes of data. Recently, - just in the past year - its become feasible to deploy and train cutting-edge Neural Networks in your browser, using Javascript. </p>
           <BuyButton />
         </Body>
       </div>
