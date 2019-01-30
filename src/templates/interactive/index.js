@@ -121,7 +121,7 @@ class PageTemplate extends React.Component {
       },
     } = this.props;
 
-    window.location = `https://codesandbox.io/s/github/dljsbook/templates/tree/master/${sandbox}`;
+    window.location = `https://codesandbox.io/s/github/dljsbook/templates/tree/dist/${sandbox}`;
     // getSandbox().then(sandboxId => {
     //   this.setState({
     //     sandboxId,
@@ -141,9 +141,11 @@ class PageTemplate extends React.Component {
     } = post.fields;
     return (
       <Container>
+        { /*
         <Header>
           Deep Learning With Javascript: A Hacker's Guide to Getting Started With Neural Networks
         </Header>
+        */ }
         <Body>
           {this.state.sandboxId && (
             <Sandbox sandbox={this.state.sandboxId} mdxScope={__mdxScope} />
