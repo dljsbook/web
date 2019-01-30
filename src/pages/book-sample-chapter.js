@@ -1,11 +1,17 @@
 import * as React from 'react';
 
-setTimeout(() => {
-  window.location = `https://dljsbook.com/book-sample-chapter.pdf?no-cache=1`;
-}, 100);
+class RedirectPage extends React.Component {
+  componentDidMount() {
+    setTimeout(() => {
+      window.location = `https://dljsbook.com/book-sample-chapter.pdf?no-cache=1`;
+    }, 100);
+  }
 
-const RedirectPage = () => (
-  <div />
-);
+  render() {
+    return (
+      <div />
+    );
+  }
+}
 
 export default RedirectPage;
