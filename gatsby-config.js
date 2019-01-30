@@ -11,6 +11,12 @@ module.exports = {
   },
   plugins: [
     {
+      resolve:'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-112845439-6',
+      },
+    },
+    {
       resolve: `gatsby-plugin-favicon`,
       options: {
         logo: './src/favicon.png',
