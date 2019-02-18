@@ -19,7 +19,7 @@
     "type-check": "tsc"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=8.15.0"
   },
   "dependencies": {
     "@dljsbook/ui": "^1.0.3",

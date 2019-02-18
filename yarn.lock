@@ -709,10 +709,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@dljsbook/ui@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@dljsbook/ui/-/ui-1.0.2.tgz#fc127e3fee5bd46071861dd3ec28654fb16d63cd"
-  integrity sha512-+8LsJCXxxl25HkjSgdMp0mCUzshTjIt2ffBQAY4dYD4KAZdnVajNjjX5DO0NCta9xzz2+tbYYLFOZmy/YOrE+w==
+"@dljsbook/ui@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@dljsbook/ui/-/ui-1.0.3.tgz#526f6912d69bd8cb32e730c992ba95cd73911c13"
+  integrity sha512-k/5rq6fv7HldhOh06OTajUmUIAAfzyxC/xL6ya2scdekxQ7YLmYzudD++MoGZ85VVI5w+E1epmNwk9Yd0ydsEg==
   dependencies:
     "@fortawesome/fontawesome-free" "^5.5.0"
     "@fortawesome/fontawesome-svg-core" "^1.2.12"
