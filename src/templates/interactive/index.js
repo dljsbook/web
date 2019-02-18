@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 // import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 // import { MDXProvider } from "@mdx-js/tag";
 import {
-  Header,
+  // Header,
   Body,
   Container,
 } from './components';
