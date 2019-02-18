@@ -1,12 +1,10 @@
 {
-  "name": "gatsby-starter-typescript-plus",
-  "description": "A starter kit for TypeScript-based Gatsby projects with sensible defaults.",
+  "name": "dljsbook",
+  "description": "Deep Learning With Javascript: A Hacker's Guide to Neural Networks",
   "version": "1.0.0",
   "private": true,
-  "author": "Resi Respati <resir014@gmail.com>",
-  "keywords": [
-    "gatsby"
-  ],
+  "author": "Kevin Scott",
+  "keywords": [ ],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
@@ -21,7 +19,7 @@
     "type-check": "tsc"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=11.0.0"
   },
   "dependencies": {
     "@dljsbook/ui": "^0.10.2",
