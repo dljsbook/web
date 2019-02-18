@@ -147,7 +147,7 @@ const options = {
         labels,
       } = _data;
       return waitForModel().then(() => {
-        const batchLogs = []
+        // const batchLogs = []
         const predictedData = pretrainedModel.predict(data)
         model.fit(predictedData, labels, {
           shuffle: true,
