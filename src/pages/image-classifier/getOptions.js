@@ -1,8 +1,5 @@
 import * as tf from "@tensorflow/tfjs";
 import * as tfvis from '@tensorflow/tfjs-vis';
-import {
-  faGraduationCap,
-} from '@fortawesome/free-solid-svg-icons'
 
 const url = 'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json';
 
@@ -139,7 +136,7 @@ let pretrainedModel;
 
 const options = {
   actionButtonText: 'Train',
-  actionButtonIcon: faGraduationCap,
+  // actionButtonIcon: faGraduationCap,
   onImages: (images) => {
     return imagesToTensors(images).then((_data) => {
       const {
