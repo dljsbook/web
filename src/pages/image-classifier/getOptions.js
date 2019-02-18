@@ -1,3 +1,4 @@
+/*
 import * as tf from "@tensorflow/tfjs";
 // import * as tfvis from '@tensorflow/tfjs-vis';
 
@@ -175,4 +176,8 @@ const getOptions = () => {
   return options;
 }
 
+
 export default getOptions;
+*/
+
+export default () => {};

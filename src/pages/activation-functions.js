@@ -3,10 +3,10 @@ import styled from 'react-emotion';
 import Page from '../components/Page';
 import Container from '../components/Container';
 import IndexLayout from '../layouts';
-import {
-  ActivationFunctions,
-  ACTIVATION_FUNCTION,
-} from '@dljsbook/ui';
+// import {
+//   ActivationFunctions,
+//   ACTIVATION_FUNCTION,
+// } from '@dljsbook/ui';
 
 const Body = styled.div`
   // flex: 0 0 75%;
@@ -14,8 +14,6 @@ const Body = styled.div`
   width: 100%;
   padding-right: 30px;
 `;
-
-const aFns = new ActivationFunctions();
 
 const Fn = styled.div`
   text-align: center;
@@ -36,7 +34,13 @@ const Row = styled.div`
 
 /* eslint-disable */
 export default class AFnsPage extends React.Component {
-  handleRef = fn => div => aFns.render(div, fn);
+  componentDidMount() {
+
+// const aFns = new ActivationFunctions();
+  }
+
+  handleRef = () => () => {}
+  // handleRef = fn => div => aFns.render(div, fn);
 
   shouldComponentUpdate = () => false;
 
