@@ -4,7 +4,7 @@ import Page from '../../components/Page';
 import Container from '../../components/Container';
 import IndexLayout from '../../layouts';
 // import getOptions from './getOptions';
-// import { ImageClassifier } from '@dljsbook/ui';
+import { ImageClassifier } from '@dljsbook/ui';
 
 import styled from 'react-emotion';
 
@@ -16,8 +16,9 @@ const Body = styled.div`
 class ImageClassifierPage extends React.Component {
   handleRef = div => {
     console.log('hi');
+    const options = {};
     // const options = getOptions();
-    // new ImageClassifier(div, options)
+    new ImageClassifier(div, options)
   }
 
   shouldComponentUpdate = () => false;
