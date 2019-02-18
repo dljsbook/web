@@ -49,28 +49,7 @@ export default class AFnsPage extends React.Component {
       <IndexLayout>
         <Page>
           <Container>
-            <Body>
-              <Row>
-                <Fn>
-                  <label>Sigmoid</label>
-                  <div ref={this.handleRef(ACTIVATION_FUNCTION.SIGMOID)} />
-                </Fn>
-                <Fn>
-                  <label>ReLU</label>
-                  <div ref={this.handleRef(ACTIVATION_FUNCTION.RELU)} />
-                </Fn>
-              </Row>
-              <Row>
-                <Fn>
-                  <label>TanH</label>
-                  <div ref={this.handleRef(ACTIVATION_FUNCTION.TANH)} />
-                </Fn>
-                <Fn>
-                  <label>Leaky ReLU</label>
-                  <div ref={this.handleRef(ACTIVATION_FUNCTION.LEAKY_RELU)} />
-                </Fn>
-              </Row>
-            </Body>
+            hi
           </Container>
         </Page>
       </IndexLayout>
