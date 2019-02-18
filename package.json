@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "author": "Kevin Scott",
-  "keywords": [ ],
+  "keywords": [],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
@@ -19,7 +19,7 @@
     "type-check": "tsc"
   },
   "engines": {
-    "node": ">=11.0.0"
+    "node": ">=10.0.0"
   },
   "dependencies": {
     "@dljsbook/ui": "^0.10.2",
