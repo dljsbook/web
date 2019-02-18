@@ -1,5 +1,5 @@
 import * as tf from "@tensorflow/tfjs";
-import * as tfvis from '@tensorflow/tfjs-vis';
+// import * as tfvis from '@tensorflow/tfjs-vis';
 
 const url = 'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json';
 
@@ -134,41 +134,45 @@ const waitForModel = () => new Promise((resolve) => {
 let model;
 let pretrainedModel;
 
-const options = {
-  actionButtonText: 'Train',
-  onImages: (images) => {
-    return imagesToTensors(images).then((_data) => {
-      const {
-        data,
-        labels,
-      } = _data;
-      return waitForModel().then(() => {
-        // const batchLogs = []
-        const predictedData = pretrainedModel.predict(data)
-        model.fit(predictedData, labels, {
-          shuffle: true,
-          epochs: 15,
-          // callbacks: {
-          //   onBatchEnd: (batch, h) => {
-          //     batchLogs.push(h)
-          //     tfvis.show.history(
-          //       {name: "Loss on Batch End", tab: "Training"},
-          //       batchLogs,
-          //       ["loss", "acc"]
-          //     )
-          //   }
-          // }
-        }).then(() => {
-          model.save('downloads://image-classification-model')
+const getOptions = () => {
+  const options = {
+    actionButtonText: 'Train',
+    onImages: (images) => {
+      return imagesToTensors(images).then((_data) => {
+        const {
+          data,
+          labels,
+        } = _data;
+        return waitForModel().then(() => {
+          // const batchLogs = []
+          const predictedData = pretrainedModel.predict(data)
+          model.fit(predictedData, labels, {
+            shuffle: true,
+            epochs: 15,
+            // callbacks: {
+            //   onBatchEnd: (batch, h) => {
+            //     batchLogs.push(h)
+            //     tfvis.show.history(
+            //       {name: "Loss on Batch End", tab: "Training"},
+            //       batchLogs,
+            //       ["loss", "acc"]
+            //     )
+            //   }
+            // }
+          }).then(() => {
+            model.save('downloads://image-classification-model')
+          });
         });
       });
-    });
-  },
+    },
+  };
+
+  getPretrainedModel().then(_pretrainedModel => {
+    pretrainedModel = _pretrainedModel;
+    model = getModel(pretrainedModel, 2);
+  });
+
+  return options;
 }
 
-getPretrainedModel().then(_pretrainedModel => {
-  pretrainedModel = _pretrainedModel;
-  model = getModel(pretrainedModel, 2);
-});
-
-export default options;
+export default getOptions;

@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 import Page from '../../components/Page';
 import Container from '../../components/Container';
 import IndexLayout from '../../layouts';
-import options from './getOptions';
+import getOptions from './getOptions';
 import { ImageClassifier } from '@dljsbook/ui';
 
 const Body = styled.div`
@@ -14,7 +14,7 @@ const Body = styled.div`
 /* eslint-disable */
 export default class ImageClassifierPage extends React.Component {
   handleRef = div => {
-    new ImageClassifier(div, options)
+    new ImageClassifier(div, getOptions())
   }
 
   shouldComponentUpdate = () => false;

@@ -22,7 +22,7 @@
     "node": ">=11.0.0"
   },
   "dependencies": {
-    "@dljsbook/ui": "^1.0.2",
+    "@dljsbook/ui": "^1.0.3",
     "@fortawesome/fontawesome-free": "^5.5.0",
     "@grove/react-font-awesome": "^1.1.5",
     "@mdx-js/mdx": "^0.15.7",
