@@ -71,7 +71,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://dljsbook.com'
+        siteUrl: 'https://dljsbook.com',
       }
     },
     {
