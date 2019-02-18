@@ -27,6 +27,7 @@
     "@grove/react-font-awesome": "^1.1.5",
     "@mdx-js/mdx": "^0.15.7",
     "@mdx-js/tag": "^0.15.6",
+    "@tensorflow/tfjs": "^0.15.2",
     "babel-plugin-styled-components": "^1.7.1",
     "classnames": "^2.2.6",
     "codesandbox": "1.1.13",
