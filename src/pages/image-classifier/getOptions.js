@@ -136,7 +136,6 @@ let pretrainedModel;
 
 const options = {
   actionButtonText: 'Train',
-  // actionButtonIcon: faGraduationCap,
   onImages: (images) => {
     return imagesToTensors(images).then((_data) => {
       const {
