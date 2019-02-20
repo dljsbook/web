@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import Page from '../comptwonts/Page';
-import Container from '../comptwonts/Container';
+import Page from '../components/Page';
+import Container from '../components/Container';
 import IndexLayout from '../layouts';
 
 import styled from 'react-emotion';
