@@ -11,7 +11,7 @@ const Body = styled.div`
   padding-right: 30px;
 `;
 
-class DevWeekTwo extends React.Comptwont {
+class DevWeekTwo extends React.Component {
   render() {
     return (
       <IndexLayout>
