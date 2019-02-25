@@ -4,22 +4,22 @@ import IndexLayout from '../layouts';
 import styled from 'react-emotion';
 
 const Button = styled.a`
-    display: block;
-    padding: 20px 40px;
-    background: rgb(31, 182, 255);
-    color: white;
-    text-transform: uppercase;
-    text-align: center;
-    width: 100%;
-    font-weight: bold;
-    font-size: 26px;
-    border: none;
-    margin: 10px 0;
-    cursor: pointer;
+  display: block;
+  padding: 20px 40px;
+  background: rgb(31, 182, 255);
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 26px;
+  border: none;
+  margin: 10px 0;
+  cursor: pointer;
 `;
 
 const BuyContainer = styled.div`
-text-align: center;
+  text-align: center;
 `;
 
 const Jumbotron = styled.div`
@@ -132,7 +132,7 @@ const Question = ({
 
 const BuyButton = () => (
   <BuyContainer>
-    <Button href="https://gum.co/dljsbook?wanted=true">Buy <span style={{ opacity: 0.85 }}>(<Price />)</span></Button>
+    <Button className="gumroad-button" href="https://gum.co/dljsbook">Buy <span style={{ opacity: 0.85 }}>(<Price />)</span></Button>
   </BuyContainer>
 );
 

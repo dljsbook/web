@@ -10,12 +10,13 @@ module.exports = {
     }
   },
   plugins: [
-    {
-      resolve:'gatsby-plugin-google-analytics',
-      options: {
-        trackingId: 'UA-112845439-6',
-      },
-    },
+    // I *think* this conflicts with Gumroad
+    // {
+    //   resolve:'gatsby-plugin-google-analytics',
+    //   options: {
+    //     trackingId: 'UA-112845439-6',
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-favicon`,
       options: {
