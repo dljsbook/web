@@ -132,7 +132,7 @@ const Question = ({
 
 const BuyButton = () => (
   <BuyContainer>
-    <Button className="gumroad-button" href="https://gum.co/dljsbook">Buy <span style={{ opacity: 0.85 }}>(<Price />)</span></Button>
+    <Button href="https://gum.co/dljsbook">Buy <span style={{ opacity: 0.85 }}>(<Price />)</span></Button>
   </BuyContainer>
 );
 
