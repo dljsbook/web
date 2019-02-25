@@ -22,7 +22,9 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
+          { /* 
           <script type="text/javascript" src="https://gumroad.com/js/gumroad.js"></script>
+          */ }
         </body>
       </html>
     )
