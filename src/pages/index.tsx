@@ -20,11 +20,6 @@ const Button = styled.a`
 
 const BuyContainer = styled.div`
 text-align: center;
-
-em {
-opacity: 0.8;
-
-}
 `;
 
 const Jumbotron = styled.div`
@@ -47,7 +42,6 @@ const Jumbotron = styled.div`
     span {
       display: block;
       color: white;
-      text-decoration: underline;
     }
   }
 
@@ -88,6 +82,10 @@ interface ISectionProps {
 
 const Section = styled.div<ISectionProps>`
   background: white;
+  &:nth-child(2n + 1) {
+    background: rgba(31,182,255,0.12);
+  }
+
   color: rgba(0, 0, 0, 0.6);
   padding: 40px 0;
 
@@ -111,10 +109,6 @@ const Section = styled.div<ISectionProps>`
   p {
     margin-bottom: 20px;
   }
-
-  ${props => props.blue ? `
-  background: rgba(31,182,255,0.12);
-  ` : null}
 `;
 
 interface IQuestionProps {
@@ -138,8 +132,7 @@ const Question = ({
 
 const BuyButton = () => (
   <BuyContainer>
-    <Button href="https://gum.co/dljsbook?wanted=true">Order Your Copy</Button>
-    <em><Price /></em>
+    <Button href="https://gum.co/dljsbook?wanted=true">Buy <span style={{ opacity: 0.85 }}>(<Price />)</span></Button>
   </BuyContainer>
 );
 
@@ -170,7 +163,7 @@ const IndexPage = () => (
         <BuyButton />
       </Contents>
     </Section>
-    <Section blue>
+    <Section>
       <Contents>
         <h2>What This Book Covers</h2>
         <p>This book is aimed at teaching Javascript developers how to leverage Deep Learning in the browser today. It's aimed at hackers looking to jump in quickly and learn through coding.</p>
@@ -185,6 +178,25 @@ const IndexPage = () => (
         </ul>
         <p>Today is the day you build a Neural Network in Javascript.</p>
         <BuyButton />
+      </Contents>
+    </Section>
+    <Section>
+      <Contents>
+        <h2>Table of Contents</h2>
+        <ol>
+          <li>What is Deep Learning</li>
+          <h3>Inference</h3>
+          <li>Making Predictions</li>
+          <li>Data & Tensors</li>
+          <li>Preparing Image Data</li>
+          <h3>Training</h3>
+          <li>Training Your Neural Network</li>
+          <li>Training From Scratch</li>
+          <li>Working With Non-Linear Data</li>
+          <li>Structured Data</li>
+          <li>Recognizing Images</li>
+          <li>Transfer Learning with ImageNet</li>
+        </ol>
       </Contents>
     </Section>
 
