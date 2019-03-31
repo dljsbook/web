@@ -143,7 +143,7 @@ class PageTemplate extends React.Component {
       <Container>
         { /*
         <Header>
-          Deep Learning With Javascript: A Hacker's Guide to Getting Started With Neural Networks
+          Deep Learning in Javascript: A Hacker's Guide to Getting Started With Neural Networks
         </Header>
         */ }
         <Body>

@@ -148,7 +148,7 @@ const IndexPage = () => (
           <BuyButton />
         </Body>
       </div>
-      <Headline><span>Deep Learning With Javascript</span> will teach you how to build a Neural Network in your browser, today.</Headline>
+      <Headline><span>Deep Learning in Javascript</span> will teach you how to build a Neural Network in your browser, today.</Headline>
     </Jumbotron>
     <Section>
       <Contents>

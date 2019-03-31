@@ -2,7 +2,7 @@
 
 module.exports = {
   siteMetadata: {
-    title: 'Deep Learning with Javascript',
+    title: 'Deep Learning in Javascript',
     description: 'DLJS',
     siteUrl: 'https://dljsbook.com',
     author: {

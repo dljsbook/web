@@ -11,7 +11,7 @@ class DevWeekOne extends React.Component {
         <p>If you're looking for my other talk, <Link to="/devweek">you can find it here</Link>.</p>
         <hr />
         <p>If you're interested on learning how to build a Neural Network in Javascript, <a href="/" target="_blank">check out the book</a>!</p>
-        <p><a href="/" target="_blank"><img src="https://dljsbook.com/dljscover.png" alt="Deep Learning With Javascript" title="Deep Learning With Javascript" /></a></p>
+        <p><a href="/" target="_blank"><img src="https://dljsbook.com/dljscover.png" alt="Deep Learning in Javascript" title="Deep Learning in Javascript" /></a></p>
       </PresentationLayout>
     );
   }
