@@ -5,7 +5,7 @@ import * as React from 'react';
 class RedirectPage extends React.Component {
   componentDidMount() {
     setTimeout(() => {
-      window.location.replace('https://dljsbook.com/book-sample-chapter.pdf');
+      window.location.replace('https://dljsbook.com/book-sample-chapters.pdf');
       // if (expired('2019-02-19')) {
       //   window.location.replace('https://dljsbook.com/');
       // } else {
