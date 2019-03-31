@@ -118,7 +118,7 @@ interface IQuestionProps {
 
 const Price = () => (
   <span>$29</span>
-)
+);
 
 const Question = ({
   question,
