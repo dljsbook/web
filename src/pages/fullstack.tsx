@@ -18,7 +18,7 @@ const FullStack = () => (
     <p>Information on hardware performance improvements <a target="_blank" href="https://heartbeat.fritz.ai/ios-12-core-ml-benchmarks-b7a79811aac1">can be found on Fritz.AI's blog</a>.</p>
     <p><a target="_blank" href="https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf">Link to the paper <em>Visualizing and Understanding Convolutional Networks</em> by Matthew D. Zeiler and Rob Fergus can be found here</a>. It explores how different layers of a Network learn visual features, vital in enabling Transfer Learning.</p>
     <hr />
-    <p>Finally, I always appreciate feedback! <a href="https://twitter.com/thekevinscott" target="_blank">Shoot me a message on Twitter</a> and let me know how you think things could be improved.</p>
+    <p>Finally, I always appreciate feedback! <a href="https://twitter.com/thekevinscott" target="_blank">Shoot me a message on Twitter</a> and let me know what you thought.</p>
     <p>Thanks! &mdash; Kevin</p>
   </PresentationLayout>
 );
